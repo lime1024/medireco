@@ -1,22 +1,3 @@
 h1 MedicalBills#new
 
-= link_to '一覧', medical_bills_path
-
-= form_with model: @medical_bill, locale: true do |form|
-  .field
-    = form.label :day
-    = form.date_select :day
-  .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :payee
-    = form.text_field :payee
-  .field
-    = form.label :classification
-    = form.select :classification, [["治療費", "治療費"], ["医薬品費", "医薬品費"], ["通院費", "通院費"]], :include_blank => true
-  .field
-    = form.label :cost
-    = form.number_field :cost
-  .field
-    = form.submit
+= render partial: 'form', locals: { medical_bill: @medical_bill}

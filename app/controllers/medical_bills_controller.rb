@@ -4,6 +4,7 @@ class MedicalBillsController < ApplicationController
   end
 
   def show
+    @medical_bill = MedicalBill.find(params[:id])
   end
 
   def new
@@ -11,6 +12,19 @@ class MedicalBillsController < ApplicationController
   end
 
   def edit
+    @medical_bill = MedicalBill.find(params[:id])
+  end
+
+  def update
+    medical_bill = MedicalBill.find(params[:id])
+    medical_bill.update!(medical_bill_params)
+    redirect_to medical_bills_url, notice: "#{medical_bill.name}の#{medical_bill.payee}を更新しました。"
+  end
+
+  def destroy
+    medical_bill = MedicalBill.find(params[:id])
+    medical_bill.destroy
+    redirect_to medical_bills_url, notice: "#{medical_bill.name}の#{medical_bill.payee}を登録しました。"
   end
 
   def create

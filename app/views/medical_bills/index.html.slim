@@ -18,3 +18,6 @@ table
         td= medical_bill.payee
         td= medical_bill.classification
         td= medical_bill.cost
+        td= link_to '詳細', medical_bill_path(medical_bill)
+        td= link_to '編集', edit_medical_bill_path(medical_bill)
+        td= link_to '削除', medical_bill, method: :delete, date: { confirm: "#{medical_bill.name}の#{medical_bill.payee}を削除します。よろしいですか？" }
