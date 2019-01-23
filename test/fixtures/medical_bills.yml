@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 2019-01-23
+  name: MyString
+  payee: MyString
+  classification: MyString
+  cost: 1
+
+two:
+  day: 2019-01-23
+  name: MyString
+  payee: MyString
+  classification: MyString
+  cost: 1

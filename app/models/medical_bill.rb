@@ -1,0 +1,2 @@
+class MedicalBill < ApplicationRecord
+end
