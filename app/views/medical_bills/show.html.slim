@@ -1,0 +1,25 @@
+h1 MedicalBills#show
+
+= link_to '一覧', medical_bills_path
+
+table
+  tbody
+    tr
+      th= MedicalBill.human_attribute_name(:day)
+      td= @medical_bill.day
+    tr
+      th= MedicalBill.human_attribute_name(:name)
+      td= @medical_bill.name
+    tr
+      th= MedicalBill.human_attribute_name(:payee)
+      td= @medical_bill.payee
+    tr
+      th= MedicalBill.human_attribute_name(:classification)
+      td= @medical_bill.classification
+    tr
+      th= MedicalBill.human_attribute_name(:cost)
+      td= @medical_bill.cost
+
+= link_to '編集', edit_medical_bill_path
+= link_to '削除', @medical_bill, method: :delete, date: { confirm: "#{@medical_bill.name}の#{@medical_bill.payee}を削除します。よろしいですか？" }
+

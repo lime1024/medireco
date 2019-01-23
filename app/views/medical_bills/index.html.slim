@@ -1,0 +1,23 @@
+h1 メディレコ
+
+= link_to '新規登録', new_medical_bill_path
+
+table
+  thead
+    tr
+      th= MedicalBill.human_attribute_name(:day)
+      th= MedicalBill.human_attribute_name(:name)
+      th= MedicalBill.human_attribute_name(:payee)
+      th= MedicalBill.human_attribute_name(:classification)
+      th= MedicalBill.human_attribute_name(:cost)
+  tbody
+    - @medical_bills.each do |medical_bill|
+      tr
+        td= medical_bill.day
+        td= medical_bill.name
+        td= medical_bill.payee
+        td= medical_bill.classification
+        td= medical_bill.cost
+        td= link_to '詳細', medical_bill_path(medical_bill)
+        td= link_to '編集', edit_medical_bill_path(medical_bill)
+        td= link_to '削除', medical_bill, method: :delete, date: { confirm: "#{medical_bill.name}の#{medical_bill.payee}を削除します。よろしいですか？" }
