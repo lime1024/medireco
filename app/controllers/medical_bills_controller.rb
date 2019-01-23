@@ -16,12 +16,12 @@ class MedicalBillsController < ApplicationController
   def create
     medical_bill = MedicalBill.new(medical_bill_params)
     medical_bill.save!
-    redirect_to medical_bills_url, notice: "#{medical_bill.name}の#{medical_bill.payee}の登録しました。"
+    redirect_to medical_bills_url, notice: "#{medical_bill.name}の#{medical_bill.payee}を登録しました。"
   end
 
   private
 
   def medical_bill_params
-    params.require(:medical_bill).permit(:day, :name, :payee, :classofocation, :cost)
+    params.require(:medical_bill).permit(:day, :name, :payee, :classification, :cost)
   end
 end
