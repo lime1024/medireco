@@ -7,6 +7,16 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      medical_bill: 医療費
+    attributes:
+      medical_bill:
+        id: ID
+        day: 日付
+        name: 名前
+        payee: 支払先
+        classification: 区分
+        cost: 金額
   date:
     abbr_day_names:
     - 日
