@@ -35,7 +35,7 @@ class MedicalBillsController < ApplicationController
 
   def output
     @medical_bills = MedicalBill.all
-    @total_cos = MedicalBill.sum(:cost)
+    @total_cost = MedicalBill.sum(:cost)
 
     @workbook = RubyXL::Parser.parse(Rails.root.join("template", "template.xlsx"))
     @sheet = @workbook.first
@@ -45,16 +45,19 @@ class MedicalBillsController < ApplicationController
     num = 8
     @medical_bills.each.with_index(1){|medical_bill, index|
       if medical_bill.classification == "治療費"
+        @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.name) # 名前
         @sheet[num][2].change_contents(medical_bill.payee) # 支払先
         @sheet[num][3].change_contents("該当する") # 区分
         @sheet[num][7].change_contents(medical_bill.cost) # 金額
       elsif medical_bill.classification == "医薬品費"
+        @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.name) # 名前
         @sheet[num][2].change_contents(medical_bill.payee) # 支払先
         @sheet[num][4].change_contents("該当する") # 区分
         @sheet[num][7].change_contents(medical_bill.cost) # 金額
       elsif medical_bill.classification == "交通費"
+        @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.name) # 名前
         @sheet[num][2].change_contents(medical_bill.payee) # 支払先
         @sheet[num][5].change_contents("該当する") # 区分
