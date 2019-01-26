@@ -1,7 +1,12 @@
 h1 メディレコ
 
+h3
+  | 合計金額 
+  = @total_cost
+  |  円
+
 = link_to '新規登録', new_medical_bill_path
-= link_to 'Excel出力', medical_bills_output_path(format: :xlsx)
+= link_to 'Excel出力', output_medical_bills_path(format: :xlsx)
 
 table
   thead
