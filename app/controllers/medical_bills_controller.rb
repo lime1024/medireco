@@ -1,6 +1,7 @@
 class MedicalBillsController < ApplicationController
   def index
     @medical_bills = MedicalBill.all
+    @total_cost = MedicalBill.sum(:cost)
   end
 
   def show
