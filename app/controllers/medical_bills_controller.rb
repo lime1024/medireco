@@ -19,19 +19,19 @@ class MedicalBillsController < ApplicationController
   def update
     medical_bill = MedicalBill.find(params[:id])
     medical_bill.update!(medical_bill_params)
-    redirect_to medical_bills_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を更新しました。"
+    redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を更新しました。"
   end
 
   def destroy
     medical_bill = MedicalBill.find(params[:id])
     medical_bill.destroy
-    redirect_to medical_bills_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
+    redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
   end
 
   def create
     medical_bill = MedicalBill.new(medical_bill_params)
     medical_bill.save!
-    redirect_to medical_bills_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
+    redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
   end
 
   def output
