@@ -44,7 +44,7 @@ class MedicalBillsController < ApplicationController
     @sheet[2][2].change_contents(@total_cost) # 合計金額
     
     num = 8
-    @medical_bills.each.with_index(1){|medical_bill, index|
+    @medical_bills.each.with_index(1){ |medical_bill, index|
       if medical_bill.classification == "治療費"
         @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.name) # 名前
