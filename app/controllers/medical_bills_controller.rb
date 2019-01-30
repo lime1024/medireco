@@ -61,7 +61,7 @@ class MedicalBillsController < ApplicationController
         @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.name) # 名前
         @sheet[num][2].change_contents(medical_bill.payee) # 支払先
-        @sheet[num][5].change_contents("該当する") # 区分
+        @sheet[num][6].change_contents("該当する") # 区分
         @sheet[num][7].change_contents(medical_bill.cost) # 金額        
       end
       num += 1
