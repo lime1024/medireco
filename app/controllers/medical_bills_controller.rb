@@ -1,7 +1,7 @@
 class MedicalBillsController < ApplicationController
   def index
-    @medical_bills = MedicalBill.all
     @total_cost = MedicalBill.sum(:cost)
+    @medical_bills = MedicalBill.search(params[:search])
   end
 
   def show
@@ -35,7 +35,7 @@ class MedicalBillsController < ApplicationController
   end
 
   def output
-    @medical_bills = MedicalBill.all
+    @medical_bills = MedicalBill.search(params[:search])
     @total_cost = MedicalBill.sum(:cost)
 
     @workbook = RubyXL::Parser.parse(Rails.root.join("template", "template.xlsx"))
