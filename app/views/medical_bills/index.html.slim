@@ -7,9 +7,8 @@ h3
 
 = link_to '新規登録', new_medical_bill_path
 = link_to 'Excel出力', output_medical_bills_path(format: :xlsx)
-= button_to '去年のデータを削除', last_year_delete_medical_bills_path, method: :delete
-
-p 出力年を入力
+= link_to '去年のExcel出力', last_year_output_medical_bills_path(format: :xlsx)
+= link_to '去年のデータを削除', last_year_delete_medical_bills_path, method: :delete
 = form_tag root_path, :method => 'get' do
   = text_field_tag :search, params[:search]
   = submit_tag '検索', :day => nil
