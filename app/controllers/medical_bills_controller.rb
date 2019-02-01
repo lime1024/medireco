@@ -1,7 +1,10 @@
 class MedicalBillsController < ApplicationController
   def index
-    @total_cost = MedicalBill.sum(:cost)
     @medical_bills = MedicalBill.search(params[:search])
+
+    today_year = Date.today.year
+    this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
+    @this_year_total_cost = this_year.sum(:cost)
   end
 
   def show
