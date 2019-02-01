@@ -72,6 +72,14 @@ class MedicalBillsController < ApplicationController
     send_file(Rails.root.join("tmp", "#{filename}.xlsx"))
   end
 
+  def last_year_delete
+    this_year = Date.today.year
+    last_year = this_year - 1
+    @medical_bills_delete = MedicalBill.where("day BETWEEN ? AND ?", "#{last_year}-01-01", "#{last_year}-03-31").destroy_all
+    redirect_to root_url
+  end
+
+
   private
 
   def medical_bill_params
