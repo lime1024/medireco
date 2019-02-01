@@ -11,7 +11,7 @@ h3
   = submit_tag '検索', :day => nil
 = form_tag output_medical_bills_path, :method => 'get' do
   = text_field_tag :search, params[:search]
-  = submit_tag '出力'
+  = submit_tag '出力', :day => nil
 
 table
   thead
