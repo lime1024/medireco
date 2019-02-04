@@ -7,12 +7,12 @@ h3
   |  円
 
 = link_to '新規登録', new_medical_bill_path
-= form_tag root_path, :method => 'get' do
-  = text_field_tag :search, params[:search]
-  = submit_tag '検索', :day => nil
-= form_tag output_medical_bills_path, :method => 'get' do
-  = text_field_tag :search, params[:search]
-  = submit_tag '出力', :day => nil
+
+p
+  | 出力年を入力
+  = form_tag output_medical_bills_path, :method => 'get' do
+    = text_field_tag :search, params[:search]
+    = submit_tag '出力', :day => nil
 
 table
   thead
