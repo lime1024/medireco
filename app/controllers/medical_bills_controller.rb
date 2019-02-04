@@ -32,9 +32,13 @@ class MedicalBillsController < ApplicationController
   end
 
   def create
-    medical_bill = MedicalBill.new(medical_bill_params)
-    medical_bill.save!
-    redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
+    @medical_bill = MedicalBill.new(medical_bill_params)
+    
+    if @medical_bill.save
+      redirect_to @medical_bill, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を登録しました。"
+    else
+      render :new
+    end
   end
 
   def output

@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_060809) do
+ActiveRecord::Schema.define(version: 2019_02_04_083408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "medical_bills", force: :cascade do |t|
-    t.date "day"
-    t.string "name"
-    t.string "payee"
-    t.string "classification"
-    t.integer "cost"
+    t.date "day", null: false
+    t.string "name", null: false
+    t.string "payee", null: false
+    t.string "classification", null: false
+    t.integer "cost", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
