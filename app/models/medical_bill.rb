@@ -6,4 +6,10 @@ class MedicalBill < ApplicationRecord
       MedicalBill.all
     end
   end
+  
+  validates :day, presence: true
+  validates :name, presence: true
+  validates :payee, presence: true
+  validates :classification, presence: true
+  validates :cost, presence: true
 end
