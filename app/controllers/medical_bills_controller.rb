@@ -1,6 +1,6 @@
 class MedicalBillsController < ApplicationController
   def index
-    @medical_bills = MedicalBill.all
+    @medical_bills = MedicalBill.all.order(day: :desc)
 
     today_year = Date.today.year
     this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
