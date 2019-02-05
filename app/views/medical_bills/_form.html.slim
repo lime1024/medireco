@@ -4,7 +4,7 @@
     - medical_bill.errors.full_messages.each do |message|
       li= message
 
-= form_with model: medical_bill, locale: true do |form|
+= form_with model: medical_bill, local: true do |form|
   .field
     = form.label :day
     = form.date_select :day
