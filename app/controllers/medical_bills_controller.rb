@@ -75,8 +75,13 @@ class MedicalBillsController < ApplicationController
     }
 
     filename = SecureRandom.urlsafe_base64(8)
-    @workbook.write(Rails.root.join("tmp", "#{filename}.xlsx"))
-    send_file(Rails.root.join("tmp", "#{filename}.xlsx"))
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        send_data @workbook.stream.read,
+          filename: 'filename.xlsx'
+      end
+    end
   end
 
   private
