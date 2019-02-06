@@ -78,11 +78,12 @@ class MedicalBillsController < ApplicationController
     respond_to do |format|
       format.html
       format.xlsx do
-        send_data @workbook.stream.read,
-          filename: 'filename.xlsx'
+        send_data(@workbook.stream.read, filename: "#{filename}.xlsx")
       end
     end
-  end
+    ensure
+      @workbook.stream.close
+    end
 
   private
 
