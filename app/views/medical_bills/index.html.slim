@@ -14,6 +14,8 @@ p
     = text_field_tag :search, params[:search]
     = submit_tag '出力',data: {disable_with: false}, :day => nil
 
+= paginate @medical_bills
+
 table
   thead
     tr
