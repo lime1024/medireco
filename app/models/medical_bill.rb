@@ -12,4 +12,11 @@ class MedicalBill < ApplicationRecord
   validates :payee, presence: true
   validates :classification, presence: true
   validates :cost, presence: true
+  validate :can_not_set_future_date
+
+  def can_not_set_future_date
+    if !day.nil? && day > Date.today
+      errors.add(:day, 'は未来日を入力できません')
+    end
+  end
 end
