@@ -1,4 +1,5 @@
 class MedicalBillsController < ApplicationController
+  before_action :set_medical_bills, only: [:show, :edit, :update, :destroy]
   def index
     @medical_bills = current_user.medical_bills.order(day: :desc).page(params[:page]).per(10)
 
@@ -8,7 +9,6 @@ class MedicalBillsController < ApplicationController
   end
 
   def show
-    @medical_bill = current_user.medical_bills.find(params[:id])
   end
 
   def new
@@ -16,17 +16,14 @@ class MedicalBillsController < ApplicationController
   end
 
   def edit
-    @medical_bill = current_user.medical_bills.find(params[:id])
   end
 
   def update
-    @medical_bill = current_user.medical_bills.find(params[:id])
     @medical_bill.update!(medical_bill_params)
     redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を更新しました。"
   end
 
   def destroy
-    @medical_bill = current_user.medical_bills.find(params[:id])
     @medical_bill.destroy
     redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
   end
@@ -89,5 +86,9 @@ class MedicalBillsController < ApplicationController
 
   def medical_bill_params
     params.require(:medical_bill).permit(:day, :name, :payee, :classification, :cost)
+  end
+
+  def set_medical_bills
+    @medical_bill = current_user.medical_bills.find(params[:id])
   end
 end
