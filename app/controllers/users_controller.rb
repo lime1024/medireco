@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :login_required
   
-  def index
-  end
-
   def new
     @user = User.new
   end
@@ -12,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_path, notice: "ユーザ #{@user.name} を登録しました"
+      redirect_to medical_bills_path, notice: "ユーザ #{@user.name} を登録しました"
     else
       render :new
     end
