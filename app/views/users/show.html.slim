@@ -1,0 +1,22 @@
+h1 ユーザーの詳細
+
+table
+  tbody
+    tr
+      th = User.human_attribute_name(:id)
+      td = current_user.id
+    tr
+      th = User.human_attribute_name(:name)
+      td = current_user.name
+    tr
+      th = User.human_attribute_name(:email)
+      td = current_user.email
+    tr
+      th = User.human_attribute_name(:created_at)
+      td = current_user.created_at
+    tr
+      th = User.human_attribute_name(:updated_at)
+      td = current_user.updated_at
+
+= link_to '編集', edit_user_path
+= link_to '削除', @user, method: :delete
