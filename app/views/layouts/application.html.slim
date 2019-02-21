@@ -13,6 +13,7 @@ html
         li = link_to '一覧', medical_bills_path
         li = link_to 'ログアウト', logout_path, method: :delete
       - else
+        li = link_to '新規登録', new_user_path
         li = link_to 'ログイン', login_path
     .container
     - if flash.notice.present?

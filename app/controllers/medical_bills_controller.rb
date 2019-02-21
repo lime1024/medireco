@@ -3,7 +3,7 @@ class MedicalBillsController < ApplicationController
     @medical_bills = current_user.medical_bills.order(day: :desc).page(params[:page]).per(10)
 
     today_year = Date.today.year
-    this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
+    this_year = current_user.medical_bills.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
     @this_year_total_cost = this_year.sum(:cost)
   end
 
