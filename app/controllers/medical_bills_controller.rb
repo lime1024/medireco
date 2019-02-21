@@ -1,6 +1,6 @@
 class MedicalBillsController < ApplicationController
   def index
-    @medical_bills = MedicalBill.all.order(day: :desc).page(params[:page]).per(10)
+    @medical_bills = current_user.medical_bills.order(day: :desc).page(params[:page]).per(10)
 
     today_year = Date.today.year
     this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
@@ -8,7 +8,7 @@ class MedicalBillsController < ApplicationController
   end
 
   def show
-    @medical_bill = MedicalBill.find(params[:id])
+    @medical_bill = current_user.medical_bills.find(params[:id])
   end
 
   def new
@@ -16,23 +16,23 @@ class MedicalBillsController < ApplicationController
   end
 
   def edit
-    @medical_bill = MedicalBill.find(params[:id])
+    @medical_bill = current_user.medical_bills.find(params[:id])
   end
 
   def update
-    medical_bill = MedicalBill.find(params[:id])
-    medical_bill.update!(medical_bill_params)
+    @medical_bill = current_user.medical_bills.find(params[:id])
+    @medical_bill.update!(medical_bill_params)
     redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を更新しました。"
   end
 
   def destroy
-    medical_bill = MedicalBill.find(params[:id])
-    medical_bill.destroy
+    @medical_bill = current_user.medical_bills.find(params[:id])
+    @medical_bill.destroy
     redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
   end
 
   def create
-    @medical_bill = MedicalBill.new(medical_bill_params)
+    @medical_bill = current_user.medical_bills.new(medical_bill_params)
     
     if @medical_bill.save
       redirect_to @medical_bill, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を登録しました。"
