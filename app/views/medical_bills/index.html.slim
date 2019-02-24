@@ -10,9 +10,9 @@ h3
 
 p
   | 出力年を入力
-  = form_tag output_medical_bills_path(format: :xlsx), :method => 'get' do
-    = text_field_tag :search, params[:search]
-    = submit_tag '出力',data: {disable_with: false}, :day => nil
+  = form_with url: output_medical_bills_path(format: :xlsx), method: :get, local: true do |f|
+    = f.select :year, options_for_select(current_user.medical_bills.select_year)
+    = f.submit '出力', data: { disable_with: false }, :day => nil
 
 = paginate @medical_bills
 

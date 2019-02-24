@@ -8,6 +8,13 @@ class MedicalBill < ApplicationRecord
       MedicalBill.all
     end
   end
+
+  def self.select_year
+    years = MedicalBill.pluck(:day).map do |date|
+      date.year
+    end
+    years.uniq
+  end
   
   validates :day, presence: true
   validates :name, presence: true

@@ -20,12 +20,12 @@ class MedicalBillsController < ApplicationController
 
   def update
     @medical_bill.update!(medical_bill_params)
-    redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を更新しました。"
+    redirect_to root_url, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を更新しました。"
   end
 
   def destroy
     @medical_bill.destroy
-    redirect_to root_url, notice: "#{medical_bill.day} #{medical_bill.name}の#{medical_bill.classification}を登録しました。"
+    redirect_to root_url, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を削除しました。"
   end
 
   def create
@@ -39,7 +39,7 @@ class MedicalBillsController < ApplicationController
   end
 
   def output
-    @medical_bills = current_user.medical_bills.search(params[:search])
+    @medical_bills = current_user.medical_bills.search(params[:year])
     @total_cost = current_user.medical_bills.sum(:cost)
 
     @workbook = RubyXL::Parser.parse(Rails.root.join("template", "template.xlsx"))
