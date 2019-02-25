@@ -22,10 +22,17 @@ class MedicalBill < ApplicationRecord
   validates :classification, presence: true
   validates :cost, presence: true
   validate :can_not_set_future_date
+  validate :can_not_set_below_zero_yen
 
   def can_not_set_future_date
     if !day.nil? && day > Date.today
       errors.add(:day, 'は未来日を入力できません')
     end
+  end
+
+  def can_not_set_below_zero_yen
+    if !cost.nil? && 0 >= cost
+      errors.add(:cost, 'は 0 円以下を入力できません')
+    end  
   end
 end
