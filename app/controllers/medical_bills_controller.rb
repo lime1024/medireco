@@ -1,5 +1,5 @@
 class MedicalBillsController < ApplicationController
-  before_action :set_medical_bills, only: [:show, :edit, :update, :destroy]
+  before_action :set_medical_bill, only: [:show, :edit, :update, :destroy]
   def index
     @medical_bills = current_user.medical_bills.order(day: :desc).page(params[:page]).per(10)
 
@@ -87,7 +87,7 @@ class MedicalBillsController < ApplicationController
     params.require(:medical_bill).permit(:day, :name, :payee, :classification, :cost)
   end
 
-  def set_medical_bills
+  def set_medical_bill
     @medical_bill = current_user.medical_bills.find(params[:id])
   end
 end
