@@ -73,7 +73,6 @@ class MedicalBillsController < ApplicationController
 
     filename = SecureRandom.urlsafe_base64(8)
     respond_to do |format|
-      format.html
       format.xlsx do
         send_data(@workbook.stream.read, filename: "#{filename}.xlsx")
       end
