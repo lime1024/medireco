@@ -1,0 +1,2 @@
+class FamilyMember < ApplicationRecord
+end
