@@ -18,5 +18,6 @@ table
       th = User.human_attribute_name(:updated_at)
       td = current_user.updated_at
 
+= link_to '家族の一覧', user_family_members_path(user_id: current_user.id)
 = link_to '編集', edit_user_path
 = link_to '削除', @user, method: :delete

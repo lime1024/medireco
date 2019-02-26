@@ -1,2 +1,3 @@
-h1 FamilyMembers#new
-p Find me in app/views/family_members/new.html.slim
+h1 家族登録
+
+= render partial: 'form', locals: { family_member: @family_member, action: :create }
