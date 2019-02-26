@@ -10,7 +10,7 @@
     = form.date_select :day
   .field
     = form.label :name
-    = form.text_field :name
+    = form.collection_select :name, current_user.family_members.all, :name, :name 
   .field
     = form.label :payee
     = form.text_field :payee

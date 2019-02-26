@@ -1,0 +1,9 @@
+- if family_member.errors.present?
+  ul
+    - family_member.errors.full_messages.each do |m|
+      li = m
+
+= form_with model: family_member, url: { action: action }, local: true do |f|
+  = f.label :name, '名前'
+  = f.text_field :name
+  = f.submit '登録する'

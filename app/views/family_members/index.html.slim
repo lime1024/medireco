@@ -1,0 +1,16 @@
+h1 家族一覧
+
+= link_to '新規登録', new_user_family_member_path
+
+table
+  thead
+    tr
+      th = FamilyMember.human_attribute_name(:name)
+      th
+  tbody
+    - @family_members.each do |family_member|
+      tr
+        td = family_member.name
+        td
+          = link_to '編集', edit_user_family_member_path(user_id: current_user.id, id: family_member.id)
+          = link_to '削除', user_family_member_path(id: family_member.id), method: :delete
