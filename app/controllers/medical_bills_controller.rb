@@ -20,12 +20,12 @@ class MedicalBillsController < ApplicationController
 
   def update
     @medical_bill.update!(medical_bill_params)
-    redirect_to root_url, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を更新しました。"
+    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を更新しました。"
   end
 
   def destroy
     @medical_bill.destroy
-    redirect_to root_url, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を削除しました。"
+    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.name}の#{@medical_bill.classification}を削除しました。"
   end
 
   def create
