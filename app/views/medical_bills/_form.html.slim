@@ -9,8 +9,8 @@
     = form.label :day
     = form.date_select :day
   .field
-    = form.label :name
-    = form.collection_select :name, current_user.family_members.all, :name, :name 
+    = form.label :family_member_id
+    = form.collection_select :family_member_id, current_user.family_members, :id, :name 
   .field
     = form.label :payee
     = form.text_field :payee
