@@ -1,5 +1,6 @@
 class MedicalBill < ApplicationRecord
   belongs_to :user
+  belongs_to :family_member
   
   def self.search(search)
     if search
