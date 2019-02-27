@@ -1,0 +1,2 @@
+class Payee < ApplicationRecord
+end
