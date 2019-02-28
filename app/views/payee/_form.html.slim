@@ -1,0 +1,9 @@
+- if payee.errors.present?
+  ul
+    - payee.errors.full_messages.each do |m|
+      li = m
+
+= form_with model: payee, url: { action: action }, local: true do |f|
+  = f.label :payee, '支払先'
+  = f.text_field :name
+  = f.submit '登録する'

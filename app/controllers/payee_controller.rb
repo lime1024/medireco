@@ -1,0 +1,2 @@
+class PayeeController < ApplicationController
+end
