@@ -32,7 +32,11 @@ class PayeesController < ApplicationController
   
   def destroy
     @payee.destroy
-    redirect_to user_payees_path, notice: "#{@payee.name} を削除しました"
+    if @payee.errors.present?
+      redirect_to user_payees_path, notice: "#{@payee.name} は関連する医療費があるため、削除できませんでした" 
+    else
+      redirect_to user_payees_path, notice: "#{@payee.name} を削除しました"
+    end
   end
 
   private
