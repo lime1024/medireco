@@ -32,7 +32,11 @@ class FamilyMembersController < ApplicationController
   
   def destroy
     @family_member.destroy
-    redirect_to user_family_members_path, notice: "#{@family_member.name} を削除しました"
+    if @family_member.errors.present?
+      redirect_to user_family_members_path, notice: "#{@family_member.name} は関連する医療費があるため、削除できませんでした" 
+    else
+      redirect_to user_family_members_path, notice: "#{@family_member.name} を削除しました"
+    end
   end
 
   private

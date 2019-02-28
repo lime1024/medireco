@@ -1,6 +1,6 @@
 class Payee < ApplicationRecord
   belongs_to :user
-  has_many :medical_bills
+  has_many :medical_bills, dependent: :restrict_with_error
   
   validates :name, presence: true
 end
