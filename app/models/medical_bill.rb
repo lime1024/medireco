@@ -17,7 +17,11 @@ class MedicalBill < ApplicationRecord
     end
     years.uniq
   end
-  
+
+  def self.summarized_output
+    MedicalBill.joins(:family_member, :payee).group("family_members.name", "payees.name", :classification).sum(:cost)
+  end
+
   validates :day, presence: true
   validates :classification, presence: true
   validates :cost, presence: true
