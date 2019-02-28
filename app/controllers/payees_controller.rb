@@ -6,7 +6,7 @@ class PayeesController < ApplicationController
   end
 
   def new
-    @payee = FamilyMember.new
+    @payee = Payee.new
   end
 
   def create
@@ -41,7 +41,7 @@ class PayeesController < ApplicationController
     params.require(:payee).permit(:name)
   end
 
-  def set_family_menmber
+  def set_payee
     @payee = current_user.payees.find(params[:id])
   end
 end
