@@ -1,5 +1,6 @@
 class Payee < ApplicationRecord
-  has_many :medical_bill
+  belongs_to :user
+  has_many :medical_bills
   
   validates :name, presence: true
 end
