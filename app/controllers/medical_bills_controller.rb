@@ -1,7 +1,7 @@
 class MedicalBillsController < ApplicationController
   before_action :set_medical_bill, only: [:show, :edit, :update, :destroy]
   def index
-    @medical_bills = current_user.medical_bills.preload(:family_member).order(day: :desc).page(params[:page]).per(10)
+    @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(10)
 
     today_year = Date.today.year
     this_year = current_user.medical_bills.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
@@ -52,19 +52,19 @@ class MedicalBillsController < ApplicationController
       if medical_bill.classification == "治療費"
         @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.family_member.name) # 名前
-        @sheet[num][2].change_contents(medical_bill.payee) # 支払先
+        @sheet[num][2].change_contents(medical_bill.payee.name) # 支払先
         @sheet[num][3].change_contents("該当する") # 区分
         @sheet[num][7].change_contents(medical_bill.cost) # 金額
       elsif medical_bill.classification == "医薬品費"
         @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.family_member.name) # 名前
-        @sheet[num][2].change_contents(medical_bill.payee) # 支払先
+        @sheet[num][2].change_contents(medical_bill.payee.name) # 支払先
         @sheet[num][4].change_contents("該当する") # 区分
         @sheet[num][7].change_contents(medical_bill.cost) # 金額
       elsif medical_bill.classification == "交通費"
         @sheet[num][0].change_contents(index) # No.
         @sheet[num][1].change_contents(medical_bill.family_member.name) # 名前
-        @sheet[num][2].change_contents(medical_bill.payee) # 支払先
+        @sheet[num][2].change_contents(medical_bill.payee.name) # 支払先
         @sheet[num][6].change_contents("該当する") # 区分
         @sheet[num][7].change_contents(medical_bill.cost) # 金額        
       end
@@ -84,7 +84,7 @@ class MedicalBillsController < ApplicationController
   private
 
   def medical_bill_params
-    params.require(:medical_bill).permit(:day, :family_member_id, :payee, :classification, :cost)
+    params.require(:medical_bill).permit(:day, :family_member_id, :payee_id, :classification, :cost)
   end
 
   def set_medical_bill

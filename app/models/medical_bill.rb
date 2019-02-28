@@ -1,6 +1,7 @@
 class MedicalBill < ApplicationRecord
   belongs_to :user
   belongs_to :family_member
+  belongs_to :payee
   
   def self.search(search)
     if search
@@ -18,7 +19,6 @@ class MedicalBill < ApplicationRecord
   end
   
   validates :day, presence: true
-  validates :payee, presence: true
   validates :classification, presence: true
   validates :cost, presence: true
   validate :can_not_set_future_date

@@ -12,8 +12,8 @@
     = form.label :family_member_id
     = form.collection_select :family_member_id, current_user.family_members, :id, :name 
   .field
-    = form.label :payee
-    = form.text_field :payee
+    = form.label :payee_id
+    = form.collection_select :payee_id, current_user.payees, :id, :name 
   .field
     = form.label :classification
     = form.select :classification, [["治療費", "治療費"], ["医薬品費", "医薬品費"], ["交通費", "交通費"]], :include_blank => true
