@@ -1,2 +1,60 @@
-h1 メディレコ
-p これは医療費を記録してエクセルを出力してシュシュっと医療費控除の申請をするためのアプリです！
+doctype html
+html
+  head
+    = favicon_link_tag 'favicon-32x32.png'
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    = stylesheet_link_tag "https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity: "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin: "anonymous"
+    = stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'home', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
+    = csp_meta_tag
+    title
+      | Medireco
+  body
+    header
+      .header_medireco-icon
+        = image_tag "medireco_icon-transparent.svg"
+      .header-sessions
+        .header-sessions_button
+          = link_to '新規登録', new_user_path, class: 'header-sessions_signup'
+          = link_to 'ログイン', login_path, class: 'header-sessions_login'
+    .container
+      .container-sessions
+        h1
+          .medireco-title
+            | メディレコ
+        .container-sessions_button
+          .container-sessions_signup
+            = link_to '新規登録', new_user_path
+          .container-sessions_login
+            = link_to 'ログイン', login_path
+      .container-description
+        h2.medireco-description
+          p 医療費控除申請の流れ
+          ul
+            li
+              i
+                .fas.fa-pen
+              | メディレコで医療費を記録
+            li
+              i
+                .fas.fa-desktop
+              | メディレコで医療費を出力
+            li
+              i
+                .fas.fa-paper-plane
+              | 医療費控除を申請
+          p メディレコの特徴
+          ul
+            li
+              i
+                .fas.fa-users
+              | 家族の分も記録が可能
+            li
+              i
+                .fas.fa-file-excel
+              | 国税庁指定のフォームで出力が可能
+    footer
+      .footer
+        .footer-copyright
+        h2 Copyright 2019 Ai Kiriyama
