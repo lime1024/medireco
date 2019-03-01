@@ -8,16 +8,19 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  header
+    .header
+      ul
+        .header-nav_items
+        - if current_user
+          li = link_to '一覧', medical_bills_path, class: 'header-nav_home'
+          li = link_to 'ログアウト', logout_path, method: :delete, class: 'header-nav_logout'
+          li = link_to 'ユーザ情報', user_path(current_user), class: 'header-nav_profile'
+        - else
+          li = link_to '新規登録', new_user_path, class: 'header-nav_signup'
+          li = link_to 'ログイン', login_path, class: 'header-nav_login'
   body
-    ul
-      - if current_user
-        li = link_to '一覧', medical_bills_path
-        li = link_to 'ログアウト', logout_path, method: :delete
-        li = link_to 'ユーザ情報', user_path(current_user)
-      - else
-        li = link_to '新規登録', new_user_path
-        li = link_to 'ログイン', login_path
     .container
-    - if flash.notice.present?
-      .alert.alert_success = flash.notice
-    = yield
+      - if flash.notice.present?
+        .alert.alert_success = flash.notice
+      = yield

@@ -1,3 +1,179 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Medireco */
+
+/* font-size */
+html {
+  font-size: 62.5%;
+  color: #5B5B5B;
+  font-family: "M PLUS Rounded 1c";
+  a {
+    text-decoration: none;
+  }
+  body {
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    header {
+      background-color: #AAD6EC; 
+      padding: 2rem;
+      display: flex;
+      .header_medireco-icon {
+        width: 66px;
+        height: 66px;
+      }
+      .header-sessions {
+        margin: 0 0 0 auto;
+        .header-sessions_signup {
+          display: inline-block;
+          padding: 15px 32px;
+          border-radius: 25px;
+          text-decoration: none;
+          color: #FFF;
+          background-color: #FC9D9D;
+          transition: 0.4s;
+          margin: 1rem 1rem;
+        }
+        .header-sessions_signup:hover {
+          background-color: #e28383;
+        }
+        .header-sessions_login {
+          display: inline-block;
+          padding: 15px 32px;
+          border-radius: 25px;
+          text-decoration: none;
+          color: #5B5B5B;
+          background-color: white;
+          transition: 0.4s;
+          margin: 1rem 1rem;
+        }
+        .header-sessions_login:hover {
+          background-color: #EEF9FF;
+        }
+      }
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      .container-sessions {
+        flex-basis: 40%;
+        text-align: center;
+        margin-left: 5rem;
+        a {
+          color: white;
+        }
+        h1 {
+          font-size: 4.8rem;
+          font-weight: bold;
+          .medireco-title {
+            margin-top: 20rem;
+            margin-bottom: 1rem;
+          }
+        }
+        .container-sessions_signup {
+          display: inline-block;
+          padding: 15px 32px;
+          border-radius: 25px;
+          text-decoration: none;
+          color: #FFF;
+          background-color: #FC9D9D;
+          transition: 0.4s;
+          margin: 1rem 1rem;
+        }
+        .container-sessions_signup:hover {
+          background-color: #e28383;
+        }
+        .container-sessions_login {
+          display: inline-block;
+          padding: 15px 32px;
+          border-radius: 25px;
+          text-decoration: none;
+          color: #FFF;
+          background-color: #AAD6EC;
+          transition: 0.4s;
+          margin: 1rem 1rem;
+        }
+        .container-sessions_login:hover {
+          background-color: #90bcd2;
+        }
+      }
+      .container-description {
+        flex-basis: 60%;
+        position: relative;
+        .medireco-description {
+          margin-top: 5rem;
+          position: absolute;
+          left: 25%;
+          li {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            i {
+              margin-right: 1rem;
+              display: inline-block;
+              width: 2rem;
+            }
+          }
+          p {
+            font-weight: bold;
+            font-size: 2.2rem;
+            margin-top: 5rem;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+    footer {
+      text-align: center;
+      background-color: #5B5B5B;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      .footer {
+        h2 {
+          font-size: 1.6rem;
+          color: white;
+        }
+      }
+    }
+  }
+}
