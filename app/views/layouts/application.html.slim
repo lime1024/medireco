@@ -13,13 +13,17 @@ html
   body
     header
       .header_medireco-icon
-        = image_tag "medireco_icon-transparent.svg"
+        - if current_user
+          = link_to medical_bills_path do
+            = image_tag "medireco_icon-transparent.svg"
+        - else
+          = link_to root_path do
+            = image_tag "medireco_icon-transparent.svg" 
       .header-sessions
         .header-sessions_button
         - if current_user
-          = link_to '一覧', medical_bills_path, class: 'header-nav_home'
-          = link_to 'ログアウト', logout_path, method: :delete, class: 'header-nav_logout'
           = link_to 'ユーザ情報', user_path(current_user), class: 'header-nav_profile'
+          = link_to 'ログアウト', logout_path, method: :delete, class: 'header-nav_logout'
         - else
           = link_to '新規登録', new_user_path, class: 'header-sessions_signup'
           = link_to 'ログイン', login_path, class: 'header-sessions_login'
