@@ -2,25 +2,33 @@ doctype html
 html
   head
     = favicon_link_tag 'favicon-32x32.png'
-    title
-      | Medireco
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    = stylesheet_link_tag "https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity: "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin: "anonymous"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'home', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  header
-    .header
-      ul
-        .header-nav_items
-        - if current_user
-          li = link_to '一覧', medical_bills_path, class: 'header-nav_home'
-          li = link_to 'ログアウト', logout_path, method: :delete, class: 'header-nav_logout'
-          li = link_to 'ユーザ情報', user_path(current_user), class: 'header-nav_profile'
-        - else
-          li = link_to '新規登録', new_user_path, class: 'header-nav_signup'
-          li = link_to 'ログイン', login_path, class: 'header-nav_login'
+    title
+      | Medireco
   body
-    .container
+    header
+      .header_medireco-icon
+        = image_tag "medireco_icon-transparent.svg"
+      .header-sessions
+        .header-sessions_button
+        - if current_user
+          = link_to '一覧', medical_bills_path, class: 'header-nav_home'
+          = link_to 'ログアウト', logout_path, method: :delete, class: 'header-nav_logout'
+          = link_to 'ユーザ情報', user_path(current_user), class: 'header-nav_profile'
+        - else
+          = link_to '新規登録', new_user_path, class: 'header-sessions_signup'
+          = link_to 'ログイン', login_path, class: 'header-sessions_login'
+  body
+    .main_container
       - if flash.notice.present?
         .alert.alert_success = flash.notice
       = yield
+    footer
+      .footer
+        .footer-copyright
+        h2 Copyright 2019 Ai Kiriyama
