@@ -19,8 +19,11 @@ class MedicalBillsController < ApplicationController
   end
 
   def update
-    @medical_bill.update!(medical_bill_params)
-    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました。"
+    if @medical_bill.update(medical_bill_params)
+      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました。"
+    else
+      render :edit
+    end
   end
 
   def destroy
