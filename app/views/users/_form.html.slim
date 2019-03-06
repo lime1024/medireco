@@ -1,15 +1,17 @@
-- if user.errors.present?
+.signup-container
+  - if user.errors.present?
+    ul
+      - user.errors.full_messages.each do |m|
+        li = m
   ul
-    - user.errors.full_messages.each do |m|
-      li = m
-
-= form_with model: @user, local: true do |f|
-  = f.label :name, '名前'
-  = f.text_field :name
-  = f.label :email, 'メールアドレス'
-  = f.text_field :email
-  = f.label :password, 'パスワード'
-  = f.password_field :password
-  = f.label :password_confirmation, 'パスワード(確認)'
-  = f.password_field :password_confirmation
-  = f.submit '登録する'
+    = form_with model: @user, local: true do |f|
+      li
+        = f.text_field :name, class: "signup-container_name-field", placeholder: "名前"
+      li
+        = f.text_field :email, class: "signup-container_mail-field", placeholder: "メールアドレス"
+      li
+        = f.password_field :password, class: "signup-container_password-field", placeholder: "パスワード"
+      li
+        = f.password_field :password_confirmation, class: "signup-container_password-confirmation-field", placeholder: "パスワード(確認)"
+      li
+        = f.submit '新規登録', class: "signup-container_submit"

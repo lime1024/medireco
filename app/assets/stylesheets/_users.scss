@@ -1,21 +1,21 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.login-container {
+.signup-container {
   text-align: center;
   margin: 10rem 10rem;
   li {
     input:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px #f1f1f1 inset;
-      -webkit-text-fill-color: #5B5B5B !important; 
+      -webkit-text-fill-color: #5B5B5B !important;
     }
     input:focus {
       outline: 0;
       border: solid;
-      border-color: #AAD6EC;
+      border-color: #FC9D9D;
       background-color: #f1f1f1;
     }
-    .login-container_mail-field {
+    .signup-container_name-field {
       width: 18em;
       height: 4rem;
       border-radius: 25px;
@@ -24,7 +24,7 @@
       margin: 1rem 0rem;
       background-color: #f1f1f1;
     }
-    .login-container_password-field {
+    .signup-container_mail-field {
       width: 18em;
       height: 4rem;
       border-radius: 25px;
@@ -33,13 +33,31 @@
       margin: 1rem 0rem;
       background-color: #f1f1f1;
     }
-    .login-container_submit {
+    .signup-container_password-field {
+      width: 18em;
+      height: 4rem;
+      border-radius: 25px;
+      padding: 1rem 1rem;
+      text-align: center;
+      margin: 1rem 0rem;
+      background-color: #f1f1f1;
+    }
+    .signup-container_password-confirmation-field {
+      width: 18em;
+      height: 4rem;
+      border-radius: 25px;
+      padding: 1rem 1rem;
+      text-align: center;
+      margin: 1rem 0rem;
+      background-color: #f1f1f1;
+    }
+    .signup-container_submit {
       display: inline-block;
       padding: 10px 32px;
       border-radius: 25px;
       text-decoration: none;
       color: #FFF;
-      background-color: #AAD6EC;
+      background-color: #FC9D9D;
       transition: 0.4s;
       margin: 1rem 1rem;
       font-size: 1.6rem;
@@ -47,8 +65,7 @@
       border: none;
     }
     .login-container_submit:hover {
-      background-color: #90bcd2;
+      background-color: #e28383;
     }
-    
   }
 }
