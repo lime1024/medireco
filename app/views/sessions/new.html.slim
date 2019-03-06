@@ -1,8 +1,9 @@
-h1 ログイン
-
-= form_with scope: :session, local: true do |f|
-  = f.label :email, 'メールアドレス'
-  = f.text_field :email
-  = f.label :password, 'パスワード'
-  = f.password_field :password
-  = f.submit 'ログインする'
+.login-container
+  ul
+    = form_with scope: :session, local: true do |f|
+      li
+        = f.text_field :email, class: "login-container_mail-field", placeholder: "メールアドレス"
+      li
+        = f.password_field :password, class: "login-container_password-field", placeholder: "パスワード"
+      li
+        = f.submit 'ログイン', class: "login-container_submit"
