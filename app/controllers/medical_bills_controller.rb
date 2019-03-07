@@ -1,7 +1,7 @@
 class MedicalBillsController < ApplicationController
   before_action :set_medical_bill, only: [:show, :edit, :update, :destroy]
   def index
-    @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(10)
+    @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(7)
 
     today_year = Date.today.year
     this_year = current_user.medical_bills.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")

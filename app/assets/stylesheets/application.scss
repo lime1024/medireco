@@ -83,6 +83,23 @@ html {
         }
       }
     }
+    .main_container-message {
+      text-align: center;
+      padding-top: 1rem;
+      -webkit-animation: fade-out 3s ease 2s forwards;
+      animation: fade-out 3s ease 2s forwards;
+      @-webkit-keyframes fade-out {
+        0% {visibility: hidden; opacity: 1;}
+        99% {visibility: visible; opacity: 0;}
+        100% {visibility: hidden; opacity: 0;}
+      }
+      
+      @keyframes fade-out {
+        0% {visibility: hidden; opacity: 1;}
+        99% {visibility: visible; opacity: 0;}
+        100% {visibility: hidden; opacity: 0;}
+      }
+    }
     .container {
       flex: 1;
       display: flex;

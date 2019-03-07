@@ -1,3 +1,131 @@
 // Place all the styles related to the medical_bills controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.medical_bills-container {
+  text-align: center;
+  .medical_bills-container_pagenate {
+    a {
+      color: #5B5B5B;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+  .medical_bills-container_this-year-cost {
+    display: inline-block;
+    font-size: 3.2rem;
+    margin: 4rem 2rem 2rem 3rem;
+    padding-bottom: 0.5rem;
+    color: #5B5B5B;
+    border-bottom: solid 3px #FC9D9D;
+  }
+  .medical_bills-container_new {
+    display: inline-block;
+    padding: 15px 32px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #FFF;
+    background-color: #FC9D9D;
+    transition: 0.4s;
+    margin: 1rem 1rem;
+    a {
+      color: white;
+    }
+  }
+  .medical_bills-container_new:hover {
+    background-color: #e28383;
+  }
+  .medical_bills-container_output {
+    display: inline-block;
+    margin-left: 10rem;
+    .medical_bills-container_output-select {
+      display: inline-block;
+      border: solid;
+      border-radius: 25px;
+      position: relative;
+      select {
+        width: 100%;
+        height: 100%;
+        padding: 1.3rem 3rem;
+        position: relative;
+        z-index: 1;
+        outline: none;
+      }
+    }
+    .medical_bills-container_output-select::before {
+      content: "";
+      display: block;
+      border-style: solid;
+      border-color: transparent;
+      border-width: 7px 5px;
+      border-bottom-color: #5B5B5B;
+      position: absolute;
+      right: 10px;
+      top: 5px;
+    }
+    .medical_bills-container_output-select::after {
+      content: "";
+      display: block;
+      border-style: solid;
+      border-color: transparent;
+      border-width: 7px 5px;
+      border-top-color: #5B5B5B;
+      position: absolute;
+      right: 10px;
+      top: 23px;
+    }
+  } 
+  .medical_bills-container_output-submit {
+    display: inline-block;
+    padding: 15px 32px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #FFF;
+    background-color: #AAD6EC;
+    transition: 0.4s;
+    margin: 1rem 1rem;
+    font-size: 1.6rem;
+    font-family: "M PLUS Rounded 1c";
+    border: none;
+  }
+  .medical_bills-container_output-submit:hover {
+    background-color: #90bcd2;
+  }
+  table {
+    display: inline-block;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    th {
+      padding: 1rem 2rem;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    td {
+      padding: 1rem 1rem 0.5rem 1rem;
+    }
+    .medical_bills-container_edit {
+      padding: 3px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #FFF;
+      background-color: #AAD6EC;
+      transition: 0.4s;
+    }
+    .medical_bills-container_edit:hover {
+      background-color: #90bcd2;
+    }
+    .medical_bills-container_delete {
+      padding: 3px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #FFF;
+      background-color: #FC9D9D;
+      transition: 0.4s;
+    }
+    .medical_bills-container_delete:hover {
+      background-color: #e28383;
+    }
+  }
+}
