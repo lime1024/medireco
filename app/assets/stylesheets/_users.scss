@@ -69,3 +69,88 @@
     }
   }
 }
+.users-container {
+  text-align: center;
+  table {
+    display: inline-block;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    th {
+      padding: 1rem 2rem;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    td {
+      padding: 1rem 1rem 0.5rem 1rem;
+    }
+    .users-container_edit {
+      padding: 3px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #5B5B5B;
+      transition: 0.4s;
+      background-color: #F1F1F1;
+    }
+    .users-container_edit:hover {
+      text-decoration: underline;
+    }
+    .users-container_delete {
+      padding: 3px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #FC9D9D;
+      background-color: #f1f1f1;
+      transition: 0.4s;
+    }
+    .users-container_delete:hover {
+      text-decoration: underline;
+    }
+  }
+  .users-container_list {
+    display: block;
+    .users-container_list-family_members {
+      display: inline-block;
+      padding: 15px 32px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #FFF;
+      background-color: #AAD6EC;
+      transition: 0.4s;
+      margin: 1rem 1rem;
+      font-size: 1.6rem;
+      font-family: "M PLUS Rounded 1c";
+      border: none;
+      outline: none;
+    }
+    .users-container_list-family_members:hover {
+      background-color: #90bcd2;
+    }
+    .users-container_list-payees {
+      display: inline-block;
+      padding: 15px 32px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #FFF;
+      background-color: #AAD6EC;
+      transition: 0.4s;
+      margin: 1rem 1rem;
+      font-size: 1.6rem;
+      font-family: "M PLUS Rounded 1c";
+      border: none;
+      outline: none;
+    }
+    .users-container_list-payees:hover {
+      background-color: #90bcd2;
+    }
+  }
+}
+.users-container_back {
+  a {
+    color: #5B5B5B;
+    font-weight: bold;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}

@@ -18,6 +18,13 @@ ja:
         classification: 区分
         cost: 金額
         family_member: 対象者
+      user:
+        name: 名前
+        email: メールアドレス
+      family_member:
+        name: 家族の名前
+      payee:
+        name: 支払先名称
   date:
     abbr_day_names:
     - 日

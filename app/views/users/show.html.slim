@@ -1,24 +1,19 @@
-h1 ユーザーの詳細
+.users-container
+  table
+    thead
+      tr
+        th = User.human_attribute_name(:name)
+        th = User.human_attribute_name(:email)
+    tbody
+      tr
+        td = current_user.name
+        td = current_user.email
+        td = link_to '編集', edit_user_path, class: "users-container_edit"
+        td = link_to '削除', @user, method: :delete, data: { confirm: "アカウントを削除します。よろしいですか？" }, class: "users-container_delete"
 
-table
-  tbody
-    tr
-      th = User.human_attribute_name(:id)
-      td = current_user.id
-    tr
-      th = User.human_attribute_name(:name)
-      td = current_user.name
-    tr
-      th = User.human_attribute_name(:email)
-      td = current_user.email
-    tr
-      th = User.human_attribute_name(:created_at)
-      td = current_user.created_at
-    tr
-      th = User.human_attribute_name(:updated_at)
-      td = current_user.updated_at
+  .users-container_list
+    = link_to '家族の一覧', user_family_members_path(user_id: current_user.id), class: "users-container_list-family_members"
+    = link_to '支払先の一覧', user_payees_path(user_id: current_user.id), class: "users-container_list-payees"
 
-= link_to '家族の一覧', user_family_members_path(user_id: current_user.id)
-= link_to '支払先の一覧', user_payees_path(user_id: current_user.id)
-= link_to '編集', edit_user_path
-= link_to '削除', @user, method: :delete, data: { confirm: "アカウントを削除します。よろしいですか？" }
+  .users-container_back
+    = link_to '戻る', medical_bills_path
