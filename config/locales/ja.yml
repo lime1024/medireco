@@ -25,6 +25,12 @@ ja:
         name: 家族の名前
       payee:
         name: 支払先の名前
+  views:
+    pagination:
+      first: "<<"
+      previous: "<"
+      next: ">"
+      last: ">>"
   date:
     abbr_day_names:
     - 日
