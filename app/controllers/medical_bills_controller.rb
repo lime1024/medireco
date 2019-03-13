@@ -9,6 +9,7 @@ class MedicalBillsController < ApplicationController
   end
 
   def show
+    redirect_to medical_bills_path
   end
 
   def new
