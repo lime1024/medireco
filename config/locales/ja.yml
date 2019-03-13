@@ -17,6 +17,7 @@ ja:
         payee: 支払先
         classification: 区分
         cost: 金額
+        family_member: 対象者
   date:
     abbr_day_names:
     - 日
