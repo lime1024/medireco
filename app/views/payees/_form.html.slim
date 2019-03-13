@@ -1,9 +1,16 @@
-- if payee.errors.present?
-  ul
-    - payee.errors.full_messages.each do |m|
-      li = m
+.payees-container_errors
+  - if payee.errors.present?
+    ul
+      - payee.errors.full_messages.each do |m|
+        li = m
 
-= form_with model: payee, url: { action: action }, local: true do |f|
-  = f.label :name, '支払先'
-  = f.text_field :name
-  = f.submit '登録する'
+.payees-container_form
+  ul
+    = form_with model: payee, url: { action: action }, local: true do |f|
+      li
+        = f.text_field :name, class: "payees-container_form-name-field", placeholder: "支払先名称"
+      li
+        = f.submit '登録する', class: "payees-container_form-submit"
+      li
+        .family_members-container_form-back
+          = link_to '戻る', user_payees_path

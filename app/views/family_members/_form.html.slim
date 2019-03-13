@@ -1,9 +1,16 @@
-- if family_member.errors.present?
-  ul
-    - family_member.errors.full_messages.each do |m|
-      li = m
+.family_members-container_errors
+  - if family_member.errors.present?
+    ul
+      - family_member.errors.full_messages.each do |m|
+        li = m
 
-= form_with model: family_member, url: { action: action }, local: true do |f|
-  = f.label :name, '名前'
-  = f.text_field :name
-  = f.submit '登録する'
+.family_members-container_form
+  ul
+    = form_with model: family_member, url: { action: action }, local: true do |f|
+      li
+        = f.text_field :name, class: "family_members-container_form-name-field", placeholder: "家族の名前"
+      li
+        = f.submit '登録', class: "family_members-container_form-submit"
+      li
+        .family_members-container_form-back
+          = link_to '戻る', user_family_members_path

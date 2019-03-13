@@ -1,16 +1,18 @@
-h1 支払先一覧
-
-= link_to '新規登録', new_user_payee_path
-
-table
-  thead
-    tr
-      th = FamilyMember.human_attribute_name(:name)
-      th
-  tbody
-    - @payees.each do |payee|
+.payees-container
+  table
+    thead
       tr
-        td = payee.name
-        td
-          = link_to '編集', edit_user_payee_path(user_id: current_user.id, id: payee.id)
-          = link_to '削除', user_payee_path(id: payee.id), method: :delete
+        th = Payee.human_attribute_name(:name)
+        th
+    tbody
+      - @payees.each do |payee|
+        tr
+          td = payee.name
+          td
+            = link_to '編集', edit_user_payee_path(user_id: current_user.id, id: payee.id), class: "payees-container_edit"
+            = link_to '削除', user_payee_path(id: payee.id), method: :delete, class: "payees-container_delete"
+
+.payees-container_button
+  = link_to '新規登録', new_user_payee_path, class: "payees-container_new"
+.payees-container_back
+  = link_to '戻る', user_path(current_user)

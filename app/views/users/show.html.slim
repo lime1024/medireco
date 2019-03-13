@@ -14,3 +14,6 @@
   .users-container_list
     = link_to '家族の一覧', user_family_members_path(user_id: current_user.id), class: "users-container_list-family_members"
     = link_to '支払先の一覧', user_payees_path(user_id: current_user.id), class: "users-container_list-payees"
+
+  .users-container_back
+    = link_to '戻る', medical_bills_path
