@@ -11,7 +11,7 @@
         = form.date_field :day, value: Time.now.strftime("%Y-%m-%d"), class: "medical_bills-container_new-date"
       li
         .medical_bills-container_new-family_member
-          = form.collection_select :family_member_id, current_user.family_members, :id, :name, prompt: "対象者を選択"
+          = form.collection_select :family_member_id, current_user.family_members, :id, :name, prompt: "名前を選択"
       li
         .medical_bills-container_new-payee
           = form.collection_select :payee_id, current_user.payees, :id, :name, prompt: "支払先を選択"

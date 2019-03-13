@@ -24,7 +24,7 @@ ja:
       family_member:
         name: 家族の名前
       payee:
-        name: 支払先名称
+        name: 支払先の名前
   date:
     abbr_day_names:
     - 日
