@@ -1,25 +1,27 @@
-- if medical_bill.errors.present?
-  ul#error_explanation
-    - medical_bill.errors.full_messages.each do |message|
-      li= message
+.medical_bills-container_erros
+  - if medical_bill.errors.present?
+    ul#error_explanation
+      - medical_bill.errors.full_messages.each do |message|
+        li= message
 
-= form_with model: medical_bill, local: true do |form|
-  .field
-    = form.label :day
-    = form.date_select :day
-  .field
-    = form.label :family_member_id
-    = form.collection_select :family_member_id, current_user.family_members, :id, :name 
-  .field
-    = form.label :payee_id
-    = form.collection_select :payee_id, current_user.payees, :id, :name 
-  .field
-    = form.label :classification
-    = form.select :classification, [["治療費", "治療費"], ["医薬品費", "医薬品費"], ["交通費", "交通費"]], :include_blank => true
-  .field
-    = form.label :cost
-    = form.number_field :cost
-  .field
-    = form.submit
-
-= link_to '戻る', medical_bills_path
+.medical_bills-container_new
+  ul
+    = form_with model: medical_bill, local: true do |form|
+      li
+        = form.date_field :day, value: Time.now.strftime("%Y-%m-%d"), class: "medical_bills-container_new-date"
+      li
+        .medical_bills-container_new-family_member
+          = form.collection_select :family_member_id, current_user.family_members, :id, :name, prompt: "対象者を選択"
+      li
+        .medical_bills-container_new-payee
+          = form.collection_select :payee_id, current_user.payees, :id, :name, prompt: "支払先を選択"
+      li
+        .medical_bills-container_new-classification
+          = form.select :classification, [["治療費", "治療費"], ["医薬品費", "医薬品費"], ["交通費", "交通費"]], prompt: "支払区分を選択"
+      li
+        = form.number_field :cost, placeholder: "金額を入力", class: "medical_bills-container_new-cost"
+      li
+        = form.submit '登録', class: "medical_bills-container_new-submit"
+      li
+        .medical_bills-container_back
+          = link_to '戻る', medical_bills_path
