@@ -1,37 +1,37 @@
-h1 
-  = link_to 'メディレコ', root_path
+.medical_bills-container
+  .medical_bills-container_this-year-cost
+    | 今年の合計金額
+    = @this_year_total_cost
+    | 円
 
-h3
-  | 今年の合計金額 
-  = @this_year_total_cost
-  |  円
+  .medical_bills-container_button
+    .medical_bills-container_new
+      = link_to '登録', new_medical_bill_path
 
-= link_to '新規登録', new_medical_bill_path
+    .medical_bills-container_output
+      = form_with url: output_medical_bills_path(format: :xlsx), method: :get, local: true do |f|
+        .medical_bills-container_output-select
+          = f.select :year, options_for_select(current_user.medical_bills.select_year), prompt: "出力年を選択"
+        = f.submit '出力', data: { disable_with: false }, :day => nil, class: "medical_bills-container_output-submit"
 
-p
-  | 出力年を入力
-  = form_with url: output_medical_bills_path(format: :xlsx), method: :get, local: true do |f|
-    = f.select :year, options_for_select(current_user.medical_bills.select_year)
-    = f.submit '出力', data: { disable_with: false }, :day => nil
-
-= paginate @medical_bills
-
-table
-  thead
-    tr
-      th= MedicalBill.human_attribute_name(:day)
-      th= MedicalBill.human_attribute_name(:name)
-      th= MedicalBill.human_attribute_name(:payee)
-      th= MedicalBill.human_attribute_name(:classification)
-      th= MedicalBill.human_attribute_name(:cost)
-  tbody
-    - @medical_bills.each do |medical_bill|
+  table
+    thead
       tr
-        td= medical_bill.day
-        td= medical_bill.family_member.name
-        td= medical_bill.payee.name
-        td= medical_bill.classification
-        td= medical_bill.cost
-        td= link_to '詳細', medical_bill_path(medical_bill)
-        td= link_to '編集', edit_medical_bill_path(medical_bill)
-        td= link_to '削除', medical_bill, method: :delete, date: { confirm: "#{medical_bill.day} #{medical_bill.family_member.name}の#{medical_bill.classification}を削除します。よろしいですか？" }
+        th= MedicalBill.human_attribute_name(:day)
+        th= MedicalBill.human_attribute_name(:name)
+        th= MedicalBill.human_attribute_name(:payee)
+        th= MedicalBill.human_attribute_name(:classification)
+        th= MedicalBill.human_attribute_name(:cost)
+    tbody
+      - @medical_bills.each do |medical_bill|
+        tr
+          td= medical_bill.day
+          td= medical_bill.family_member.name
+          td= medical_bill.payee.name
+          td= medical_bill.classification
+          td= medical_bill.cost
+          td= link_to '編集', edit_medical_bill_path(medical_bill), class: "medical_bills-container_edit"
+          td= link_to '削除', medical_bill, method: :delete, class: "medical_bills-container_delete", date: { confirm: "#{medical_bill.day} #{medical_bill.family_member.name}の#{medical_bill.classification}を削除します。よろしいですか？" }
+
+  .medical_bills-container_pagenate
+    = paginate @medical_bills

@@ -27,10 +27,10 @@ html
         - else
           = link_to '新規登録', new_user_path, class: 'header-sessions_signup'
           = link_to 'ログイン', login_path, class: 'header-sessions_login'
-  body
     .main_container
-      - if flash.notice.present?
-        .alert.alert_success = flash.notice
+      .main_container-message
+        - if flash.notice.present?
+          .alert.alert_success = flash.notice
       = yield
     footer
       .footer

@@ -1,7 +1,7 @@
 class MedicalBillsController < ApplicationController
   before_action :set_medical_bill, only: [:show, :edit, :update, :destroy]
   def index
-    @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(10)
+    @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(7)
 
     today_year = Date.today.year
     this_year = current_user.medical_bills.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
@@ -9,6 +9,7 @@ class MedicalBillsController < ApplicationController
   end
 
   def show
+    redirect_to medical_bills_path
   end
 
   def new
@@ -19,8 +20,11 @@ class MedicalBillsController < ApplicationController
   end
 
   def update
-    @medical_bill.update!(medical_bill_params)
-    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました。"
+    if @medical_bill.update(medical_bill_params)
+      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました。"
+    else
+      render :edit
+    end
   end
 
   def destroy

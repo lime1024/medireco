@@ -5,6 +5,7 @@
 @import "ress";
 @import "sessions";
 @import "users";
+@import "medical_bills";
 
 html {
   font-size: 62.5%;
@@ -59,13 +60,13 @@ html {
           padding: 15px 32px;
           border-radius: 25px;
           text-decoration: none;
-          color: #FFF;
-          background-color: #FC9D9D;
+          color: #5B5B5B;
+          background-color: white;
           transition: 0.4s;
           margin: 1rem 1rem;
         }
-        .header-nac_profile:hover {
-          background-color: #e28383;
+        .header-nav_profile:hover {
+          background-color: #EEF9FF;
         }
         .header-nav_logout {
           display: inline-block;
@@ -80,6 +81,23 @@ html {
         .header-nav_logout:hover {
           background-color: #EEF9FF;
         }
+      }
+    }
+    .main_container-message {
+      text-align: center;
+      padding-top: 1rem;
+      -webkit-animation: fade-out 3s ease 2s forwards;
+      animation: fade-out 3s ease 2s forwards;
+      @-webkit-keyframes fade-out {
+        0% {visibility: hidden; opacity: 1;}
+        99% {visibility: visible; opacity: 0;}
+        100% {visibility: hidden; opacity: 0;}
+      }
+      
+      @keyframes fade-out {
+        0% {visibility: hidden; opacity: 1;}
+        99% {visibility: visible; opacity: 0;}
+        100% {visibility: hidden; opacity: 0;}
       }
     }
     .container {
