@@ -9,7 +9,7 @@
         td = current_user.name
         td = current_user.email
         td = link_to '編集', edit_user_path, class: "users-container_edit"
-        td = link_to '削除', @user, method: :delete, data: { confirm: "アカウントを削除します。よろしいですか？" }, class: "users-container_delete"
+        td = link_to '退会', @user, method: :delete, data: { confirm: "アカウントを削除します。よろしいですか？" }, class: "users-container_delete"
 
   .users-container_list
     = link_to '家族の一覧', user_family_members_path(user_id: current_user.id), class: "users-container_list-family_members"
