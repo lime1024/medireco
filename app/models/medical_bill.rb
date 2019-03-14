@@ -22,6 +22,12 @@ class MedicalBill < ApplicationRecord
     MedicalBill.joins(:family_member, :payee).group("family_members.name", "payees.name", :classification).sum(:cost)
   end
 
+  def self.this_year_total_cost
+    today_year = Date.today.year
+    this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
+    this_year_total_cost = this_year.sum(:cost)
+  end
+
   validates :day, presence: true
   validates :classification, presence: true
   validates :cost, presence: true

@@ -1,7 +1,7 @@
 .medical_bills-container
   .medical_bills-container_this-year-cost
     | 今年の合計金額
-    = @this_year_total_cost
+    = current_user.medical_bills.this_year_total_cost
     | 円
 
   .medical_bills-container_button
