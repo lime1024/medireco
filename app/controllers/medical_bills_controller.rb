@@ -1,7 +1,22 @@
 class MedicalBillsController < ApplicationController
   before_action :set_medical_bill, only: [:show, :edit, :update, :destroy]
   def index
-    @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(7)
+    respond_to do |format|
+      format.html do
+        @medical_bills = current_user.medical_bills.preload(:family_member, :payee).order(day: :desc).page(params[:page]).per(7)
+        render :index
+      end
+      format.xlsx do
+        output = MedicalBillOutput.new(user: current_user, year: params[:year])
+        begin
+          workbook = output.as_xlsx
+          filename = SecureRandom.urlsafe_base64(8)
+          send_data(workbook.stream.read, filename: "#{filename}.xlsx")
+        ensure
+          workbook.stream.close
+        end
+      end
+    end
   end
 
   def show
@@ -37,49 +52,6 @@ class MedicalBillsController < ApplicationController
       render :new
     end
   end
-
-  def output
-    @medical_bills = current_user.medical_bills.search(params[:year]).summarized_output
-    @total_cost = current_user.medical_bills.sum(:cost)
-
-    @workbook = RubyXL::Parser.parse(Rails.root.join("template", "template.xlsx"))
-    @sheet = @workbook.first
-
-    @sheet[2][2].change_contents(@total_cost) # 合計金額
-    
-    num = 8
-    @medical_bills.each.with_index(1){ |medical_bill, index|
-      if medical_bill[0][2] == "治療費"
-        @sheet[num][0].change_contents(index) # No.
-        @sheet[num][1].change_contents(medical_bill[0][0]) # 名前
-        @sheet[num][2].change_contents(medical_bill[0][1]) # 支払先
-        @sheet[num][3].change_contents("該当する") # 区分
-        @sheet[num][7].change_contents(medical_bill[1]) # 金額
-      elsif medical_bill[0][2] == "医薬品費"
-        @sheet[num][0].change_contents(index) # No.
-        @sheet[num][1].change_contents(medical_bill[0][0]) # 名前
-        @sheet[num][2].change_contents(medical_bill[0][1]) # 支払先
-        @sheet[num][4].change_contents("該当する") # 区分
-        @sheet[num][7].change_contents(medical_bill[1]) # 金額
-      elsif medical_bill[0][2] == "交通費"
-        @sheet[num][0].change_contents(index) # No.
-        @sheet[num][1].change_contents(medical_bill[0][0]) # 名前
-        @sheet[num][2].change_contents(medical_bill[0][1]) # 支払先
-        @sheet[num][6].change_contents("該当する") # 区分
-        @sheet[num][7].change_contents(medical_bill[1]) # 金額        
-      end
-      num += 1
-    }
-
-    filename = SecureRandom.urlsafe_base64(8)
-    respond_to do |format|
-      format.xlsx do
-        send_data(@workbook.stream.read, filename: "#{filename}.xlsx")
-      end
-    end
-    ensure
-      @workbook.stream.close
-    end
 
   private
 

@@ -9,7 +9,7 @@
       = link_to '医療費の登録', new_medical_bill_path
 
     .medical_bills-container_output
-      = form_with url: output_medical_bills_path(format: :xlsx), method: :get, local: true do |f|
+      = form_with url: medical_bills_path(format: :xlsx), method: :get, local: true do |f|
         .medical_bills-container_output-select
           = f.select :year, options_for_select(current_user.medical_bills.select_year), prompt: "出力年を選択"
         = f.submit '出力', data: { disable_with: false }, :day => nil, class: "medical_bills-container_output-submit"
