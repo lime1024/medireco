@@ -5,7 +5,7 @@ class MedicalBill < ApplicationRecord
   
   def self.search(search)
     if search
-      MedicalBill.where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-03-31")
+      MedicalBill.where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-12-31")
     else
       MedicalBill.all
     end
@@ -24,7 +24,7 @@ class MedicalBill < ApplicationRecord
 
   def self.this_year_total_cost
     today_year = Date.today.year
-    this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-03-31")
+    this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-12-31")
     this_year_total_cost = this_year.sum(:cost)
   end
 
