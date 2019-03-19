@@ -7,6 +7,10 @@ class MedicalBillsController < ApplicationController
         render :index
       end
       format.xlsx do
+        if params[:year].blank?
+          redirect_to medical_bills_path(format: :html), notice: "出力年を選択してください"
+          return
+        end
         output = MedicalBillOutput.new(user: current_user, year: params[:year])
         begin
           workbook = output.as_xlsx
