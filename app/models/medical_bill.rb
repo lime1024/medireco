@@ -2,14 +2,13 @@ class MedicalBill < ApplicationRecord
   belongs_to :user
   belongs_to :family_member
   belongs_to :payee
-  
-  def self.search(search)
-    if search
-      MedicalBill.where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-12-31")
-    else
-      MedicalBill.all
-    end
-  end
+
+  scope :recent, -> { order(day: :desc) }
+  scope :search, -> (search) { where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-12-31") }
+  scope :this_year, -> {
+    today_year = Date.today.year
+    where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-12-31")
+  }
 
   def self.select_year
     years = MedicalBill.pluck(:day).map do |date|
@@ -23,8 +22,6 @@ class MedicalBill < ApplicationRecord
   end
 
   def self.this_year_total_cost
-    today_year = Date.today.year
-    this_year = MedicalBill.where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-12-31")
     this_year_total_cost = this_year.sum(:cost)
   end
 
