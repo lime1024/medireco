@@ -3,9 +3,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :medical_bills do
-    get 'output', on: :collection
-  end
+  resources :medical_bills
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
