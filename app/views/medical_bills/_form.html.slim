@@ -8,7 +8,7 @@
   ul
     = form_with model: medical_bill, local: true do |form|
       li
-        = form.date_field :day, value: Time.now.strftime("%Y-%m-%d"), class: "medical_bills-container_new-date"
+        = form.date_field :day, value: medical_bill.day || Time.zone.now.strftime("%Y-%m-%d"), class: "medical_bills-container_new-date"
       li
         .medical_bills-container_new-family_member
           = form.collection_select :family_member_id, current_user.family_members, :id, :name, prompt: "名前を選択"
