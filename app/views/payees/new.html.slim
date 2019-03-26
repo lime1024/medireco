@@ -1,1 +1,23 @@
+.payees_new-description
+  table
+    thead
+      tr
+        th
+          i
+            .fas.fa-clinic-medical
+          | 治療費
+        th
+          i
+            .fas.fa-pills
+          | 医薬品費
+        th
+          i
+            .fas.fa-subway
+          | 交通費
+    tbody
+      tr
+        td = '病院の名前'
+        td = '薬局の名前'
+        td = '交通機関の名前'
+
 = render partial: 'form', locals: { payee: @payee, action: :create }
