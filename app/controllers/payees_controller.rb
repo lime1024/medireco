@@ -11,9 +11,12 @@ class PayeesController < ApplicationController
 
   def create
     @payee = current_user.payees.new(payee_params)
-
     if @payee.save
-      redirect_to user_payees_path, notice: "#{@payee.name} を登録しました"
+      if params[:payee][:from] == 'medical_bill'
+        redirect_to new_medical_bill_path
+      else
+        redirect_to user_payees_path, notice: "#{@payee.name} を登録しました"
+      end
     else
       render :new
     end
