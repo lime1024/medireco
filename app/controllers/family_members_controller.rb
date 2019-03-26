@@ -13,7 +13,11 @@ class FamilyMembersController < ApplicationController
     @family_member = current_user.family_members.new(family_member_params)
 
     if @family_member.save
-      redirect_to user_family_members_path, notice: "#{@family_member.name} を登録しました"
+      if params[:family_member][:from] == 'medical_bill'
+        redirect_to new_medical_bill_path
+      else
+        redirect_to user_family_members_path, notice: "#{@family_member.name} を登録しました"
+      end
     else
       render :new
     end

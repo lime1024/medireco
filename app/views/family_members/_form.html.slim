@@ -7,6 +7,7 @@
 .family_members-container_form
   ul
     = form_with model: family_member, url: { action: action }, local: true do |f|
+      = f.hidden_field :from, value: params[:from]
       li
         = f.text_field :name, class: "family_members-container_form-name-field", placeholder: "家族の名前"
       li

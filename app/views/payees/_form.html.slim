@@ -7,6 +7,7 @@
 .payees-container_form
   ul
     = form_with model: payee, url: { action: action }, local: true do |f|
+      = f.hidden_field :from, value: params[:from]
       li
         = f.text_field :name, class: "payees-container_form-name-field", placeholder: "支払先の名前"
       li

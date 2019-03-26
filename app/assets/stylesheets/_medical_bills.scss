@@ -146,14 +146,14 @@
       height: 4rem;
       padding: 1rem 1rem 1rem 1rem;
       text-align: center;
-      margin: 3rem 0rem 1rem 0rem;
+      margin: 1rem 0rem 1rem 0rem;
     }
     .medical_bills-container_new-family_member {
       display: inline-block;
       border-radius: 25px;
       position: relative;
       background-color: #F1F1F1;
-      width: 18em;
+      width: 16em;
       height: 4rem;
       select {
         width: 100%;
@@ -192,7 +192,7 @@
       border-radius: 25px;
       position: relative;
       background-color: #F1F1F1;
-      width: 18em;
+      width: 16em;
       height: 4rem;
       margin: 1rem 0rem;
       select {
@@ -304,4 +304,36 @@
 }
 .medical_bills-container_erros {
   text-align: center;
+}
+.medical_bills-container_add-family_member {
+  display: inline-block;
+  padding: 5px 5px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #FFF;
+  background-color: #AAD6EC;
+  margin-left: 0.3rem;
+  transition: 0.4s;
+  a {
+    color: white;
+  }
+}
+.medical_bills-container_add-family_member:hover {
+  background-color: #90bcd2;
+}
+.medical_bills-container_add-payee {
+  display: inline-block;
+  padding: 5px 5px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #FFF;
+  background-color: #AAD6EC;
+  transition: 0.4s;
+  margin-left: 0.3rem;
+  a {
+    color: white;
+  }
+}
+.medical_bills-container_add-payee:hover {
+  background-color: #90bcd2;
 }
