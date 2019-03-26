@@ -12,9 +12,11 @@
       li
         .medical_bills-container_new-family_member
           = form.collection_select :family_member_id, current_user.family_members, :id, :name, prompt: "名前を選択"
+        = link_to '＋', new_user_family_member_path(user_id: current_user.id), class: "medical_bills-container_add-family_member"
       li
         .medical_bills-container_new-payee
           = form.collection_select :payee_id, current_user.payees, :id, :name, prompt: "支払先を選択"
+        = link_to '＋', new_user_payee_path(user_id: current_user.id), class: "medical_bills-container_add-payee"
       li
         .medical_bills-container_new-classification
           = form.select :classification, [["治療費", "治療費"], ["医薬品費", "医薬品費"], ["交通費", "交通費"]], prompt: "支払区分を選択"
