@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to medical_bills_path, notice: "ユーザ #{@user.name} を登録しました"
+      FamilyMember.create(name: @user.name, user_id: @user.id)
     else
       render :new
     end
