@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe '医療費登録', type: :system do
   before do
-    FactoryBot.create(:user)
+    FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password')
     visit login_path
       fill_in 'メールアドレス', with: 'maguro@example.com'
       fill_in 'パスワード', with: 'password'

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe '支払先の登録', type: :system do
+  let!(:user) { FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password') }
+
   before do
-    FactoryBot.create(:user)
     visit login_path
     fill_in 'メールアドレス', with: 'maguro@example.com'
     fill_in 'パスワード', with: 'password'
@@ -10,7 +11,9 @@ describe '支払先の登録', type: :system do
   end
 
   it '支払先が登録できる' do
-    visit new_user_payee_path(user_id: 1)
+    click_link 'ユーザ情報'
+    click_link '支払先の一覧'
+    click_link '新規登録'
     fill_in '支払先の名前', with: 'おさかな病院'
     click_button '登録'
     expect(page).to have_content 'おさかな病院 を登録しました'
@@ -18,9 +21,9 @@ describe '支払先の登録', type: :system do
 
   context '支払先が登録されているとき' do
     before do
-      visit new_user_payee_path(user_id: 1)
-      fill_in '支払先の名前', with: 'おさかな病院'
-      click_button '登録'
+      FactoryBot.create(:payee, name: 'おさかな病院', user: user)
+      click_link 'ユーザ情報'
+      click_link '支払先の一覧'
     end
 
     it '支払先が閲覧できる' do

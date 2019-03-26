@@ -49,23 +49,6 @@ describe 'medical_bill', type: :model do
     end
   end
 
-  context '医療費登録で空欄があるとき' do
-    it '日付が空白なら医療費は登録されない' do
-      medical_bill = MedicalBill.new(classification: "治療費", cost: 300)
-      expect(medical_bill).to_not be_valid
-    end
-
-    it '区分が空白なら医療費は登録されない' do
-      medical_bill = MedicalBill.new(day: Date.new(2019, 01, 01), cost: 300)
-      expect(medical_bill).to_not be_valid
-    end
-
-    it '金額が空白なら医療費は登録されない' do
-      medical_bill = MedicalBill.new(day: Date.new(2019, 01, 01), classification: "治療費")
-      expect(medical_bill).to_not be_valid
-    end
-  end
-
   context '医療費登録をしたとき' do
     it 'can_not_set_future_date 未来日なら登録できない' do
       medical_bill = MedicalBill.new(day: Date.tomorrow, classification: "治療費", cost: 100)

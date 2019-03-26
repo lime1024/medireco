@@ -13,7 +13,7 @@ describe 'アカウント', type: :system do
 
   context 'ユーザが登録されているとき' do
     before do
-      FactoryBot.create(:user)
+      FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password')
       visit login_path
       fill_in 'メールアドレス', with: 'maguro@example.com'
       fill_in 'パスワード', with: 'password'
