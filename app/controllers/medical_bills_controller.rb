@@ -36,7 +36,7 @@ class MedicalBillsController < ApplicationController
 
   def update
     if @medical_bill.update(medical_bill_params)
-      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました。"
+      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました"
     else
       render :edit
     end
@@ -44,14 +44,14 @@ class MedicalBillsController < ApplicationController
 
   def destroy
     @medical_bill.destroy
-    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を削除しました。"
+    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を削除しました"
   end
 
   def create
     @medical_bill = current_user.medical_bills.new(medical_bill_params)
     
     if @medical_bill.save
-      redirect_to @medical_bill, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を登録しました。"
+      redirect_to @medical_bill, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を登録しました"
     else
       render :new
     end
