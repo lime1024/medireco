@@ -9,7 +9,7 @@ describe '医療費登録', type: :system do
       click_button 'ログイン'
 
       visit new_user_family_member_path(user_id: 1)
-      fill_in '家族の名前', with: 'まぐろ'
+      fill_in '家族の名前', with: 'しゃけ'
       click_button '登録'
 
       visit new_user_payee_path(user_id: 1)
@@ -20,19 +20,19 @@ describe '医療費登録', type: :system do
   it '医療費が登録できる' do
     visit new_medical_bill_path
     fill_in 'medical_bill[day]', with: '01-11-002011'
-    select 'まぐろ', from: 'medical_bill[family_member_id]'
+    select 'しゃけ', from: 'medical_bill[family_member_id]'
     select 'おさかな病院', from: 'medical_bill[payee_id]'
     select '治療費', from: 'medical_bill[classification]'
     fill_in '金額を入力', with: '111111'
     click_button '登録'
-    expect(page).to have_content '2011-01-11 まぐろの治療費を登録しました'
+    expect(page).to have_content '2011-01-11 しゃけの治療費を登録しました'
   end
 
   context '医療費が登録されているとき' do
     before do
       visit new_medical_bill_path
       fill_in 'medical_bill[day]', with: '01-11-002011'
-      select 'まぐろ', from: 'medical_bill[family_member_id]'
+      select 'しゃけ', from: 'medical_bill[family_member_id]'
       select 'おさかな病院', from: 'medical_bill[payee_id]'
       select '治療費', from: 'medical_bill[classification]'
       fill_in '金額を入力', with: '111111'
@@ -40,7 +40,7 @@ describe '医療費登録', type: :system do
     end
 
     it '医療費を閲覧することができる' do
-      expect(page).to have_content 'まぐろ'
+      expect(page).to have_content 'しゃけ'
       expect(page).to have_content 'おさかな病院'
     end
 
@@ -49,18 +49,18 @@ describe '医療費登録', type: :system do
       select '交通費', from: 'medical_bill[classification]'
       fill_in '金額を入力', with: '123456'
       click_button '登録'
-      expect(page).to have_content '2011-01-11 まぐろの交通費を更新しました'
+      expect(page).to have_content '2011-01-11 しゃけの交通費を更新しました'
     end
 
     it '医療費を削除することができる' do
       click_link '削除'
-      expect(page).to have_content '2011-01-11 まぐろの治療費を削除しました' 
+      expect(page).to have_content '2011-01-11 しゃけの治療費を削除しました' 
     end
 
     it '新しく登録した出力年が選択できる' do
       visit new_medical_bill_path
       fill_in 'medical_bill[day]', with: '01-11-002011'
-      select 'まぐろ', from: 'medical_bill[family_member_id]'
+      select 'しゃけ', from: 'medical_bill[family_member_id]'
       select 'おさかな病院', from: 'medical_bill[payee_id]'
       select '治療費', from: 'medical_bill[classification]'
       fill_in '金額を入力', with: '111111'
