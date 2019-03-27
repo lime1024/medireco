@@ -3,6 +3,9 @@
 <img src = "https://github.com/lime1024/medireco/blob/master/app/assets/images/medireco_icon.svg" width = 150px>
 </div>
 
+## URL
+https://medireco.herokuapp.com/
+
 ## アプリ概要
 「メディレコ」というサービスは、「医療費控除の記録の面倒さ」を解決したい「医療費控除を申請したいけど記録が面倒だと思っている人(自分)」向けの、「記録サービス」です。ユーザーは「家族全員の医療費、交通費の記録」ができ、他アプリとは違って、「PC閲覧とエクセル出力」が備わっている事が特徴です。
 
