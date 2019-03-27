@@ -230,6 +230,12 @@ html {
       font-size: 1.4rem;
       font-weight: normal;
       margin: 1rem 1.4rem;
+      a{
+        color: #5B5B5B;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
     }
     li {
       font-size: 1.4rem;
