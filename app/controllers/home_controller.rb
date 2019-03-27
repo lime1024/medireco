@@ -3,4 +3,10 @@ class HomeController < ApplicationController
   
   def index
   end
+
+  def policy
+  end
+
+  def disclaimer
+  end
 end
