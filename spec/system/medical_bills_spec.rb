@@ -9,7 +9,7 @@ describe '医療費登録', type: :system do
       click_button 'ログイン'
 
       visit new_user_family_member_path(user_id: 1)
-      fill_in '家族の名前', with: 'しゃけ'
+      fill_in 'family_member[name]', with: 'しゃけ'
       click_button '登録'
 
       visit new_user_payee_path(user_id: 1)
@@ -54,7 +54,7 @@ describe '医療費登録', type: :system do
 
     it '医療費を削除することができる' do
       click_link '削除'
-      expect(page).to have_content '2011-01-11 しゃけの治療費を削除しました' 
+      expect(page).to have_content '2011-01-11 しゃけの治療費を削除しました'
     end
 
     it '新しく登録した出力年が選択できる' do
