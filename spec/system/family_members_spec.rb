@@ -14,7 +14,7 @@ describe '家族の登録', type: :system do
     click_link 'ユーザ情報'
     click_link '家族の一覧'
     click_link '新規登録'
-    fill_in '家族の名前', with: 'しゃけ'
+    fill_in 'family_member[name]', with: 'しゃけ'
     click_button '登録'
     expect(page).to have_content 'しゃけ を登録しました'
   end
@@ -27,12 +27,12 @@ describe '家族の登録', type: :system do
     end
 
     it '家族が閲覧できる' do
-      expect(page).to have_content 'しゃけ' 
+      expect(page).to have_content 'しゃけ'
     end
 
     it '家族が変更できる' do
       click_link '編集'
-      fill_in '家族の名前', with: 'のどぐろ'
+      fill_in 'family_member[name]', with: 'のどぐろ'
       click_button '登録'
       expect(page).to have_content 'のどぐろ を更新しました'
     end
