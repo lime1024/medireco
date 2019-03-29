@@ -1,0 +1,8 @@
+{
+  "name": "Medireco",
+  "description": "This app to create application documents for medical expenses deduction.",
+  "keywords": ["Rails"],
+  "website": "https://medireco.herokuapp.com/",
+  "repository": "https://github.com/lime1024/medireco",
+  "logo": "https://raw.githubusercontent.com/lime1024/medireco/master/app/assets/images/medireco_icon.svg",
+}
