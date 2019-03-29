@@ -8,4 +8,9 @@
   "addons": [
     "heroku-postgresql"
   ]
+  {
+    "scripts": {
+      "postdeploy": "rails db:migrate",
+    }
+  }
 }
