@@ -4,7 +4,7 @@
   "keywords": ["Rails"],
   "website": "https://medireco.herokuapp.com/",
   "repository": "https://github.com/lime1024/medireco",
-  "logo": "https://raw.githubusercontent.com/lime1024/medireco/master/app/assets/images/medireco_icon.svg",
+  "logo": "https://github.com/lime1024/medireco/blob/master/app/assets/images/medireco_icon.svg",
   "addons": ["heroku-postgresql"],
   "scripts": {"postdeploy": "rails db:migrate"}
 }
