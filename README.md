@@ -1,3 +1,5 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 # メディレコ
 <div align="center">
 <img src = "https://github.com/lime1024/medireco/blob/master/app/assets/images/medireco_icon.svg" width = 150px>
