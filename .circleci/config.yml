@@ -51,6 +51,10 @@ jobs: # a collection of steps
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
+          name: migrate
+          command: rails db:migrate RAILS_ENV=test
+
+      - run:
           name: Run rspec in parallel
           command: |
             bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
