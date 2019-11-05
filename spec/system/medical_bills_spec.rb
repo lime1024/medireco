@@ -19,7 +19,7 @@ describe '医療費登録', type: :system do
 
   it '医療費が登録できる' do
     visit new_medical_bill_path
-    fill_in 'medical_bill[day]', with: '01-11-002011'
+    fill_in 'medical_bill[day]', with: '002011-01-11'
     select 'しゃけ', from: 'medical_bill[family_member_id]'
     select 'おさかな病院', from: 'medical_bill[payee_id]'
     select '治療費', from: 'medical_bill[classification]'
@@ -31,7 +31,7 @@ describe '医療費登録', type: :system do
   context '医療費が登録されているとき' do
     before do
       visit new_medical_bill_path
-      fill_in 'medical_bill[day]', with: '01-11-002011'
+      fill_in 'medical_bill[day]', with: '002011-01-11'
       select 'しゃけ', from: 'medical_bill[family_member_id]'
       select 'おさかな病院', from: 'medical_bill[payee_id]'
       select '治療費', from: 'medical_bill[classification]'
@@ -59,7 +59,7 @@ describe '医療費登録', type: :system do
 
     it '新しく登録した出力年が選択できる' do
       visit new_medical_bill_path
-      fill_in 'medical_bill[day]', with: '01-11-002011'
+      fill_in 'medical_bill[day]', with: '002011-01-11'
       select 'しゃけ', from: 'medical_bill[family_member_id]'
       select 'おさかな病院', from: 'medical_bill[payee_id]'
       select '治療費', from: 'medical_bill[classification]'
