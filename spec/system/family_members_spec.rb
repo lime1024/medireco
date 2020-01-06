@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe '家族の登録', type: :system do
   let!(:user) { FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password') }
+  let!(:family_member) { FactoryBot.create(:family_member, name: 'しゃけ', user: user) }
 
   before do
     visit login_path
@@ -21,7 +22,6 @@ describe '家族の登録', type: :system do
 
   context '家族が登録されているとき' do
     before do
-      FactoryBot.create(:family_member, name: 'しゃけ', user: user)
       click_link 'ユーザ情報'
       click_link '家族の一覧'
     end
@@ -31,7 +31,7 @@ describe '家族の登録', type: :system do
     end
 
     it '家族が変更できる' do
-      click_link '編集'
+      visit edit_user_family_member_path(user.id, family_member.id)
       fill_in 'family_member[name]', with: 'のどぐろ'
       click_button '登録'
       expect(page).to have_content 'のどぐろ を更新しました'
