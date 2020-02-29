@@ -3,7 +3,6 @@ class MedicalBill < ApplicationRecord
   belongs_to :family_member
   belongs_to :payee
 
-  scope :recent, -> { order(day: :desc, created_at: :desc) }
   scope :search, -> (search) { where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-12-31") }
   scope :this_year, -> {
     today_year = Date.today.year

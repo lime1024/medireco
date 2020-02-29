@@ -3,7 +3,10 @@ class MedicalBillsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @medical_bills = current_user.medical_bills.preload(:family_member, :payee).recent.page(params[:page])
+        @medical_bills = current_user.medical_bills
+          .preload(:family_member, :payee)
+          .order(day: :desc, created_at: :desc)
+          .page(params[:page])
         render :index
       end
       format.xlsx do
