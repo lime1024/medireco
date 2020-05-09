@@ -15,8 +15,6 @@ RSpec.describe '医療費の登録', type: :request do
         post medical_bills_path, params: {
           medical_bill: {
             day: '2011-01-11',
-            family_member_id: user.family_members.first,
-            payee_id: payee.id,
             classification: '治療費',
             cost: '111111',
             user_id: user.id,
@@ -56,8 +54,6 @@ RSpec.describe '医療費の登録', type: :request do
       post medical_bills_path, params: {
         medical_bill: {
           day: '2011-01-11',
-          family_member_id: user.family_members.first,
-          payee_id: payee.id,
           classification: '治療費',
           cost: '111111',
           user_id: user.id,
