@@ -25,11 +25,6 @@ RSpec.describe '医療費の登録', type: :request do
       }.to change(MedicalBill, :count).by(1)
     end
 
-    xit do
-      post medical_bills_path
-      expect(response).to redirect_to(medical_bills_path)
-    end
-
     it '医療費が編集できること' do
       medical_bill = FactoryBot.create(:medical_bill, user: user, cost: 111111)
       expect {
