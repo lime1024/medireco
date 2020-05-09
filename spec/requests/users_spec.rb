@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'User', type: :request do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, name: 'きんめだい') }
 
-  it 'アカウント登録ができる' do
+  it 'ユーザを登録できること' do
     expect {
       post users_path, params: {
         user: {
@@ -13,6 +13,7 @@ RSpec.describe 'User', type: :request do
         }
       }
     }.to change(User, :count).by(1)
+    expect(response).to redirect_to(medical_bills_path)
   end
 
   context 'ログインしている場合' do
@@ -20,30 +21,34 @@ RSpec.describe 'User', type: :request do
       login(user)
     end
 
-    it 'アカウントを変更できる' do
-      patch user_path(user), params: {
-        user: {
-          name: 'まぐろ'
+    it 'ユーザを変更できること' do
+      expect {
+        patch user_path(user), params: {
+          user: {
+            name: 'まぐろ'
+          }
         }
-      }
+      }.to change { user.reload.name }.from('きんめだい').to('まぐろ')
       expect(response).to redirect_to(user_path(user))
-      expect(User.find(user.id).name).to eq 'まぐろ'
     end
 
-    it 'アカウントを削除できる' do
+    it 'ユーザを削除できること' do
       expect {
         delete user_path(user)
       }.to change(User, :count).by(-1)
+      expect(response).to redirect_to(root_path)
     end
   end
 
   context 'ログインしていない場合' do
     it do
-      delete user_path(user), params: {
-        user: {
-          name: 'まぐろ'
+      expect {
+        delete user_path(user), params: {
+          user: {
+            name: 'まぐろ'
+          }
         }
-      }
+      }.not_to change { User.count }
       expect(response).to redirect_to(root_path)
     end
   end
