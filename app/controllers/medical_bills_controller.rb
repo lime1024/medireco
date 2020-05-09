@@ -23,10 +23,6 @@ class MedicalBillsController < ApplicationController
     end
   end
 
-  def show
-    redirect_to medical_bills_path
-  end
-
   def new
     @medical_bill = MedicalBill.new
   end
@@ -51,7 +47,7 @@ class MedicalBillsController < ApplicationController
     @medical_bill = current_user.medical_bills.new(medical_bill_params)
     
     if @medical_bill.save
-      redirect_to @medical_bill, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を登録しました"
+      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を登録しました"
     else
       render :new
     end

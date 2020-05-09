@@ -23,6 +23,7 @@ RSpec.describe '医療費の登録', type: :request do
           }
         }
       }.to change(MedicalBill, :count).by(1)
+      expect(response).to redirect_to(medical_bills_path)
     end
 
     it '医療費が編集できること' do
