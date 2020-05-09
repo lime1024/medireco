@@ -4,10 +4,7 @@ describe 'アカウント', type: :system do
   let!(:user) { FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password') }
 
   before do
-    visit login_path
-    fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: user.password
-    click_button 'ログイン'
+    login(user)
     visit user_path(user)
   end
 

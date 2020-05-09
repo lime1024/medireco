@@ -7,10 +7,7 @@ RSpec.describe '医療費登録', type: :system do
   let!(:medical_bill) { FactoryBot.create(:medical_bill, user: user, family_member: family_member, payee: payee) }
 
   before do
-    visit login_path
-    fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: user.password
-    click_button 'ログイン'
+    login(user)
   end
 
   it '医療費を閲覧することができる' do

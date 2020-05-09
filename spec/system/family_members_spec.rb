@@ -4,10 +4,7 @@ describe '家族の登録', type: :system do
   let(:user) { FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password') }
 
   before do
-    visit login_path
-    fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: user.password
-    click_button 'ログイン'
+    login(user)
     visit user_family_members_path(user)
   end
 
