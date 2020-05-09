@@ -1,39 +1,26 @@
 require 'rails_helper'
 
-describe '医療費登録', type: :system do
+RSpec.describe '医療費登録', type: :system do
+  let(:user) { FactoryBot.create(:user) }
+  let(:payee) { FactoryBot.create(:payee, user: user) }
+  let(:family_member) { FactoryBot.create(:family_member, user: user) }
+  let!(:medical_bill) { FactoryBot.create(:medical_bill, user: user, family_member: family_member, payee: payee) }
+
   before do
-    FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password')
     visit login_path
-    fill_in 'メールアドレス', with: 'maguro@example.com'
-    fill_in 'パスワード', with: 'password'
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
     click_button 'ログイン'
   end
 
-  context '医療費が登録されているとき' do
-    before do
-      visit new_medical_bill_path
-      fill_in 'medical_bill[day]', with: '01-11-002011'
-      select 'しゃけ', from: 'medical_bill[family_member_id]'
-      select 'おさかな病院', from: 'medical_bill[payee_id]'
-      select '治療費', from: 'medical_bill[classification]'
-      fill_in '金額を入力', with: '111111'
-      click_button '登録'
-    end
+  it '医療費を閲覧することができる' do
+    expect(page).to have_content payee.name
+    expect(page).to have_content family_member.name
+  end
 
-    it '医療費を閲覧することができる' do
-      expect(page).to have_content 'しゃけ'
-      expect(page).to have_content 'おさかな病院'
-    end
-
-    it '新しく登録した出力年が選択できる' do
-      visit new_medical_bill_path
-      fill_in 'medical_bill[day]', with: '01-11-002011'
-      select 'しゃけ', from: 'medical_bill[family_member_id]'
-      select 'おさかな病院', from: 'medical_bill[payee_id]'
-      select '治療費', from: 'medical_bill[classification]'
-      fill_in '金額を入力', with: '111111'
-      click_button '登録'
-      select '2011', from: 'year'
-    end
+  it '新しく登録した出力年が選択できる' do
+    FactoryBot.create(:medical_bill, day: '2020-01-01', user: user, family_member: family_member, payee: payee)
+    visit current_path
+    expect(page).to have_select('year', options: ['出力年を選択', '2019', '2020'])
   end
 end
