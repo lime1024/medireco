@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'アカウント', type: :system do
-  let!(:user) { FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password') }
+RSpec.describe 'User', type: :system do
+  let(:user) { FactoryBot.create(:user) }
 
   before do
     login(user)
