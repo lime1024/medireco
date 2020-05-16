@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :medical_bills
+  resources :medical_bills, except: :show
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

@@ -1,71 +1,24 @@
 require 'rails_helper'
 
-describe '医療費登録', type: :system do
+RSpec.describe 'MedicalBill', type: :system do
+  let(:user) { FactoryBot.create(:user) }
+  let(:payee) { FactoryBot.create(:payee, user: user) }
+  let(:family_member) { FactoryBot.create(:family_member, user: user) }
+  let!(:medical_bill) { FactoryBot.create(:medical_bill, day: '2019-01-01', user: user, family_member: family_member, payee: payee) }
+
   before do
-    FactoryBot.create(:user, name: 'まぐろ', email: 'maguro@example.com', password: 'password')
-    visit login_path
-      fill_in 'メールアドレス', with: 'maguro@example.com'
-      fill_in 'パスワード', with: 'password'
-      click_button 'ログイン'
-
-      visit new_user_family_member_path(user_id: 1)
-      fill_in 'family_member[name]', with: 'しゃけ'
-      click_button '登録'
-
-      visit new_user_payee_path(user_id: 1)
-      fill_in '支払先の名前', with: 'おさかな病院'
-      click_button '登録'
+    login(user)
+    visit medical_bills_path
   end
 
-  it '医療費が登録できる' do
-    visit new_medical_bill_path
-    fill_in 'medical_bill[day]', with: '01-11-002011'
-    select 'しゃけ', from: 'medical_bill[family_member_id]'
-    select 'おさかな病院', from: 'medical_bill[payee_id]'
-    select '治療費', from: 'medical_bill[classification]'
-    fill_in '金額を入力', with: '111111'
-    click_button '登録'
-    expect(page).to have_content '2011-01-11 しゃけの治療費を登録しました'
+  it '医療費を閲覧することができること' do
+    expect(page).to have_content payee.name
+    expect(page).to have_content family_member.name
   end
 
-  context '医療費が登録されているとき' do
-    before do
-      visit new_medical_bill_path
-      fill_in 'medical_bill[day]', with: '01-11-002011'
-      select 'しゃけ', from: 'medical_bill[family_member_id]'
-      select 'おさかな病院', from: 'medical_bill[payee_id]'
-      select '治療費', from: 'medical_bill[classification]'
-      fill_in '金額を入力', with: '111111'
-      click_button '登録'
-    end
-
-    it '医療費を閲覧することができる' do
-      expect(page).to have_content 'しゃけ'
-      expect(page).to have_content 'おさかな病院'
-    end
-
-    it '医療費を編集することができる' do
-      click_link '編集'
-      select '交通費', from: 'medical_bill[classification]'
-      fill_in '金額を入力', with: '123456'
-      click_button '登録'
-      expect(page).to have_content '2011-01-11 しゃけの交通費を更新しました'
-    end
-
-    it '医療費を削除することができる' do
-      click_link '削除'
-      expect(page).to have_content '2011-01-11 しゃけの治療費を削除しました'
-    end
-
-    it '新しく登録した出力年が選択できる' do
-      visit new_medical_bill_path
-      fill_in 'medical_bill[day]', with: '01-11-002011'
-      select 'しゃけ', from: 'medical_bill[family_member_id]'
-      select 'おさかな病院', from: 'medical_bill[payee_id]'
-      select '治療費', from: 'medical_bill[classification]'
-      fill_in '金額を入力', with: '111111'
-      click_button '登録'
-      select '2011', from: 'year'
-    end
+  it '新しく登録した出力年が選択できること' do
+    FactoryBot.create(:medical_bill, day: '2020-01-01', user: user, family_member: family_member, payee: payee)
+    visit current_path
+    expect(page).to have_select('year', options: ['出力年を選択', '2019', '2020'])
   end
 end
