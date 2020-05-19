@@ -31,6 +31,7 @@ ja:
       previous: "<"
       next: ">"
       last: ">>"
+      truncate: "&hellip;"
   date:
     abbr_day_names:
     - 日
