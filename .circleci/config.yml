@@ -1,64 +1,19 @@
-version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    parallelism: 3 # run three instances of this job in parallel
-    docker: # run the steps with Docker
-      - image: circleci/ruby:2.5.3-node-browsers # ...with this image as the primary container; this is where all `steps` will run
-        environment: # environment variables for primary container
-          BUNDLER_VERSION: 2.0.1
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
-          PGUSER: medireco
-          RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine # database image
-        environment: # environment variables for database
-          POSTGRES_USER: medireco
-          POSTGRES_DB: medireco_test
-          POSTGRES_PASSWORD: ""
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-
-      - run:
-          name: setup bundler
-          command: gem install bundler -v $BUNDLER_VERSION
-
-      # Which version of bundler?
-      - run:
-          name: Which bundler?
-          command: bundle -v
-
-      # Restore bundle cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+version: 2.1
+jobs:
+  backend-build:
+    docker:
+      - image: circleci/ruby:2.5.3
+      - image: circleci/postgres:11.8
+    steps:
+      - checkout
+      - run: bundle -v
       - restore_cache:
-          keys:
-            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-demo-bundle-v2-
-
-      - run: # Install Ruby dependencies
-          name: Bundle Install
-          command: bundle check || bundle install
-
-      # Store bundle cache for Ruby dependencies
+        key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - run: bundle clean
       - save_cache:
-          key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Database setup
-          command: bin/rails db:schema:load --trace
-
-      - run:
-          name: Run rspec in parallel
-          command: bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-
-      # Save test results for timing analysis
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test_results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
+        key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
+        paths:
+          - ./vendor/bundle
+      - run: bundle exec rails db:create db:schema:load
+      - run: bundle exec rspec
