@@ -1,37 +1,55 @@
 version: 2.1
 jobs:
-  backend-build:
+  build:
     docker:
-      - image: circleci/ruby:2.5.3
+      - image: circleci/ruby:2.5.3-node
+        environment:
+          BUNDLER_VERSION: 2.0.1
+          PGHOST: 127.0.0.1
+          PGPORT: 5432
+          PGPASSWORD: ""
+          PGUSER: medireco
+          RAILS_ENV: test
       - image: circleci/postgres:11.8
+        environment:
+          POSTGRES_PASSWORD: ""
+          POSTGRES_USER: medireco
+          POSTGRES_DB: medireco_test
     steps:
       - checkout
-      - run: bundle -v
       - restore_cache:
-        key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --path vendor/bundle
-      - run: bundle clean
+          key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
+      - run:
+          command: |
+            gem install bundler -v $BUNDLER_VERSION
+            bundle install --path vendor/bundle
+            bundle clean
       - save_cache:
-        key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
-      - run: bundle exec rails db:create db:schema:load
-      - run: bundle exec rspec
+          key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
+      - run:
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          command: bundle exec rails db:create db:schema:load
+      - run:
+          command: bundle exec rspec
   deploy-to-production:
     docker:
       - image: circleci/ruby:2.5.3
       - image: circleci/postgres:11.8
     steps:
       - checkout
-      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - run:
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
   build-to-deploy:
     jobs:
-      - backend-build
+      - build
       - deploy-to-production:
-        requires:
-          - backend-build
-        filters:
-          branches:
-            only: master
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
