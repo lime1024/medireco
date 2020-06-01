@@ -6,13 +6,11 @@ jobs:
         environment:
           BUNDLER_VERSION: 2.0.1
           PGHOST: 127.0.0.1
-          PGPASSWORD: ""
           PGUSER: medireco
           RAILS_ENV: test
       - image: circleci/postgres:11.8
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_PASSWORD: ""
           POSTGRES_USER: medireco
           POSTGRES_DB: medireco_test
     steps:
