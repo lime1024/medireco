@@ -6,7 +6,6 @@ jobs:
         environment:
           BUNDLER_VERSION: 2.0.1
           PGHOST: 127.0.0.1
-          PGPORT: 5432
           PGPASSWORD: ""
           PGUSER: medireco
           RAILS_ENV: test
