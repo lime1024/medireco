@@ -24,19 +24,15 @@ jobs:
           key: v1-medireco-backend-gem-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-      - run:
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          command: bundle exec rails db:create db:schema:load
-      - run:
-          command: bundle exec rspec
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run: bundle exec rails db:create db:schema:load
+      - run: bundle exec rspec
   deploy-to-production:
     docker:
       - image: circleci/ruby:2.5.3
     steps:
       - checkout
-      - run:
-          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
   test-and-deploy:
