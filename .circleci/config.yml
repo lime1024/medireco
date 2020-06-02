@@ -33,7 +33,6 @@ jobs:
   deploy-to-production:
     docker:
       - image: circleci/ruby:2.5.3
-      - image: circleci/postgres:11.8
     steps:
       - checkout
       - run:
