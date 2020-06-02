@@ -6,12 +6,11 @@ jobs:
         environment:
           BUNDLER_VERSION: 2.0.1
           PGHOST: 127.0.0.1
-          PGUSER: medireco
+          PGUSER: postgres
           RAILS_ENV: test
       - image: circleci/postgres:11.8
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_USER: medireco
     steps:
       - checkout
       - restore_cache:
