@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
         environment:
@@ -40,12 +40,12 @@ jobs:
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
-  build-to-deploy:
+  test-and-deploy:
     jobs:
-      - build
+      - test
       - deploy-to-production:
           requires:
-            - build
+            - test
           filters:
             branches:
               only: master
