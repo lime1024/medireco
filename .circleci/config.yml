@@ -12,7 +12,6 @@ jobs:
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_USER: medireco
-          POSTGRES_DB: medireco_test
     steps:
       - checkout
       - restore_cache:
