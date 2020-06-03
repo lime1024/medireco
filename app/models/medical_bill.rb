@@ -3,6 +3,12 @@ class MedicalBill < ApplicationRecord
   belongs_to :family_member
   belongs_to :payee
 
+  validates :day, presence: true
+  validates :classification, presence: true
+  validates :cost, presence: true
+  validate :can_not_set_future_date
+  validate :can_not_set_below_zero_yen
+
   scope :search, -> (search) { where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-12-31") }
   scope :this_year, -> {
     today_year = Date.today.year
@@ -23,12 +29,6 @@ class MedicalBill < ApplicationRecord
   def self.this_year_total_cost
     this_year_total_cost = this_year.sum(:cost)
   end
-
-  validates :day, presence: true
-  validates :classification, presence: true
-  validates :cost, presence: true
-  validate :can_not_set_future_date
-  validate :can_not_set_below_zero_yen
 
   def can_not_set_future_date
     if !day.nil? && day > Date.today
