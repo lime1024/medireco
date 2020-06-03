@@ -11,7 +11,8 @@ class MedicalBillOutput
     sheet[2][2].change_contents(@total_cost) # 合計金額
     
     num = 8
-    @medical_bills.each.with_index(1){ |medical_bill, index|
+
+    @medical_bills.each.with_index(1) do |medical_bill, index|
       sheet[num][0].change_contents(index) # No.
       sheet[num][1].change_contents(medical_bill[0][0]) # 名前
       sheet[num][2].change_contents(medical_bill[0][1]) # 支払先
@@ -25,7 +26,7 @@ class MedicalBillOutput
         sheet[num][6].change_contents("該当する") 
       end
       num += 1
-    }
+    end
     
     return workbook
   end
