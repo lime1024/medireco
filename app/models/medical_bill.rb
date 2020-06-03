@@ -15,19 +15,18 @@ class MedicalBill < ApplicationRecord
     where("day BETWEEN ? AND ?", "#{today_year}-01-01", "#{today_year}-12-31")
   }
 
-  def self.select_year
-    years = MedicalBill.pluck(:day).map do |date|
-      date.year
+  class << self
+    def select_year
+      pluck(:day).map(&:year).uniq
     end
-    years.uniq
-  end
 
-  def self.summarized_output
-    MedicalBill.joins(:family_member, :payee).group("family_members.name", "payees.name", :classification).sum(:cost)
-  end
+    def summarized_output
+      joins(:family_member, :payee).group("family_members.name", "payees.name", :classification).sum(:cost)
+    end
 
-  def self.this_year_total_cost
-    this_year_total_cost = this_year.sum(:cost)
+    def this_year_total_cost
+      this_year.sum(:cost)
+    end
   end
 
   def can_not_set_future_date
