@@ -5,9 +5,8 @@ class MedicalBill < ApplicationRecord
 
   validates :day, presence: true
   validates :classification, presence: true
-  validates :cost, presence: true
+  validates :cost, presence: true, numericality: { greater_than: 0 }
   validate :can_not_set_future_date
-  validate :can_not_set_below_zero_yen
 
   scope :search, -> (search) { where("day BETWEEN ? AND ?", "#{search}-01-01", "#{search}-12-31") }
   scope :this_year, -> {
@@ -33,11 +32,5 @@ class MedicalBill < ApplicationRecord
     if !day.nil? && day > Date.today
       errors.add(:day, 'は未来日を入力できません')
     end
-  end
-
-  def can_not_set_below_zero_yen
-    if !cost.nil? && 0 >= cost
-      errors.add(:cost, 'は 0 円以下を入力できません')
-    end  
   end
 end
