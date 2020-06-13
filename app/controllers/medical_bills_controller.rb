@@ -1,5 +1,6 @@
 class MedicalBillsController < ApplicationController
   before_action :set_medical_bill, only: [:show, :edit, :update, :destroy]
+
   def index
     respond_to do |format|
       format.html do

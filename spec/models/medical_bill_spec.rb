@@ -53,16 +53,4 @@ RSpec.describe MedicalBill, type: :model do
       expect(medical_bill).to_not be_valid
     end
   end
-
-  describe '#can_not_set_below_zero_yen' do
-    it '0 円なら登録できないこと' do
-      medical_bill = described_class.new(day: Date.new(2019, 01, 01), classification: "治療費", cost: 0)
-      expect(medical_bill).to_not be_valid
-    end
-
-    it '0 円以下なら登録できないこと' do
-      medical_bill = described_class.new(day: Date.new(2019, 01, 01), classification: "治療費", cost: -100)
-      expect(medical_bill).to_not be_valid
-    end
-  end
 end
