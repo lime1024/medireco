@@ -63,4 +63,14 @@ RSpec.describe 'MedicalBill', type: :request do
       expect(response).to redirect_to(login_path)
     end
   end
+
+  describe '医療費のダウンロード' do
+    it 'ダウンロードできること' do
+      login(user)
+      FactoryBot.create(:medical_bill, day: Date.new(2019, 01, 01))
+
+      get medical_bills_path(format: :xlsx), params: { year: 2019 }
+      expect(response.headers['Content-Type']).to eq 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    end
+  end
 end
