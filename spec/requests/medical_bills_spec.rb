@@ -70,6 +70,8 @@ RSpec.describe 'MedicalBill', type: :request do
       FactoryBot.create(:medical_bill, day: Date.new(2019, 01, 01))
 
       get medical_bills_path(format: :xlsx), params: { year: 2019 }
+
+      expect(response).to have_http_status(200)
       expect(response.headers['Content-Type']).to eq 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     end
   end
