@@ -6,7 +6,7 @@ RSpec.describe MedicalBillOutput, type: :model do
       user = FactoryBot.create(:user)
       FactoryBot.create(:family_member, user: user)
       FactoryBot.create(:payee, user: user)
-      FactoryBot.create(:medical_bill, cost: 100, user: user)
+      FactoryBot.create(:medical_bill, day: Date.new(2019, 01, 01), cost: 100, user: user)
 
       workbook = described_class.new(user: user, year: 2019).as_xlsx
       sheet = workbook.first
