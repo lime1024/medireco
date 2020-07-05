@@ -1,3 +1,5 @@
+require 'rubyXL/convenience_methods'
+
 class MedicalBillOutput
   def initialize(user:, year:)
     @medical_bills = user.medical_bills.search(year).summarized_output
