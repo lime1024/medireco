@@ -45,7 +45,7 @@ class PayeesController < ApplicationController
   private
 
   def payee_params
-    params.require(:payee).permit(:name)
+    params.require(:payee).except(:from).permit(:name)
   end
 
   def set_payee
