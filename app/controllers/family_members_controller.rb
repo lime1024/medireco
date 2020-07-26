@@ -46,7 +46,7 @@ class FamilyMembersController < ApplicationController
   private
 
   def family_member_params
-    params.require(:family_member).permit(:name)
+    params.require(:family_member).except(:from).permit(:name)
   end
 
   def set_family_menmber
