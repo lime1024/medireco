@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_23_074109) do
+ActiveRecord::Schema.define(version: 2021_03_07_074530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2021_02_23_074109) do
     t.bigint "user_id", null: false
     t.bigint "family_member_id", null: false
     t.bigint "payee_id", null: false
+    t.bigint "classification_id"
+    t.index ["classification_id"], name: "index_medical_bills_on_classification_id"
     t.index ["family_member_id"], name: "index_medical_bills_on_family_member_id"
     t.index ["payee_id"], name: "index_medical_bills_on_payee_id"
     t.index ["user_id"], name: "index_medical_bills_on_user_id"
@@ -58,4 +60,5 @@ ActiveRecord::Schema.define(version: 2021_02_23_074109) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "medical_bills", "classifications"
 end
