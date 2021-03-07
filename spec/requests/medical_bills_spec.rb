@@ -4,6 +4,7 @@ RSpec.describe 'MedicalBill', type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:payee) { FactoryBot.create(:payee, user: user) }
   let(:family_member) { FactoryBot.create(:family_member, user: user) }
+  let(:classification) { FactoryBot.create(:classification) }
   let!(:medical_bill) { FactoryBot.create(:medical_bill, cost: 111111, user: user) }
 
   context 'ログインしている場合' do
@@ -16,7 +17,7 @@ RSpec.describe 'MedicalBill', type: :request do
         post medical_bills_path, params: {
           medical_bill: {
             day: '2011-01-11',
-            classification: '治療費',
+            classification_id: classification.id,
             cost: '111111',
             user_id: user.id,
             family_member_id: family_member.id,
@@ -52,7 +53,7 @@ RSpec.describe 'MedicalBill', type: :request do
         post medical_bills_path, params: {
           medical_bill: {
             day: '2011-01-11',
-            classification: '治療費',
+            classification_id: classification.id,
             cost: '111111',
             user_id: user.id,
             family_member_id: family_member.id,
