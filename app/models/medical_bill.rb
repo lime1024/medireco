@@ -4,7 +4,6 @@ class MedicalBill < ApplicationRecord
   belongs_to :payee
 
   validates :day, presence: true
-  validates :classification, presence: true
   validates :cost, presence: true, numericality: { greater_than: 0 }
   validate :can_not_set_future_date
 
