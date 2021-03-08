@@ -2,6 +2,10 @@ require 'rails_helper'
 require "#{Rails.root}/lib/classification_migrator"
 
 RSpec.describe ClassificationMigrator do
+  let(:user) { FactoryBot.create(:user) }
+  let(:payee) { FactoryBot.create(:payee, user: user) }
+  let(:family_member) { FactoryBot.create(:family_member, user: user) }
+
   before do
     @treatment_cost = Classification.create(name: '治療費')
     @medicine_cost = Classification.create(name: '医薬品費')
@@ -9,9 +13,33 @@ RSpec.describe ClassificationMigrator do
   end
 
   it do
-    medical_bill_1 = FactoryBot.create(:medical_bill, classification: '治療費')
-    medical_bill_2 = FactoryBot.create(:medical_bill, classification: '交通費')
-    medical_bill_3 = FactoryBot.create(:medical_bill, classification: '医薬品費')
+    medical_bill_1 =
+      MedicalBill.create(
+        day: '2020-01-01',
+        classification: '治療費',
+        cost: 100,
+        user: user,
+        family_member: family_member,
+        payee: payee
+      )
+    medical_bill_2 =
+      MedicalBill.create(
+        day: '2020-01-01',
+        classification: '交通費',
+        cost: 100,
+        user: user,
+        family_member: family_member,
+        payee: payee
+      )
+    medical_bill_3 =
+      MedicalBill.create(
+        day: '2020-01-01',
+        classification: '医薬品費',
+        cost: 100,
+        user: user,
+        family_member: family_member,
+        payee: payee
+      )
 
     expect {
       ClassificationMigrator.execute
