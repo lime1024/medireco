@@ -20,7 +20,7 @@ class MedicalBill < ApplicationRecord
     end
 
     def summarized_output
-      joins(:family_member, :payee).group("family_members.name", "payees.name", :classification).sum(:cost)
+      joins(:family_member, :payee, :_classification).group("family_members.name", "payees.name", "classifications.name").sum(:cost)
     end
 
     def this_year_total_cost
