@@ -5,6 +5,6 @@ FactoryBot.define do
     association :user
     association :family_member
     association :payee
-    association :classification
+    association :_classification, factory: :classification
   end
 end
