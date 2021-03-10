@@ -2,6 +2,7 @@ class MedicalBill < ApplicationRecord
   belongs_to :user
   belongs_to :family_member
   belongs_to :payee
+  belongs_to :_classification, class_name: 'Classification', foreign_key: 'classification_id', optional: true
 
   validates :day, presence: true
   validates :cost, presence: true, numericality: { greater_than: 0 }
