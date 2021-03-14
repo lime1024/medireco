@@ -57,4 +57,36 @@ RSpec.describe ClassificationMigrator do
 
     expect { ClassificationMigrator.execute }.to raise_error UnknownClassificationError
   end
+
+  it do
+    20.times do
+      MedicalBill.create(
+        day: '2020-01-01',
+        classification: '治療費',
+        cost: 100,
+        user: user,
+        family_member: family_member,
+        payee: payee
+      )
+    end
+
+    expect(ClassificationMigrator.classification_id_nil_count).to eq 20
+  end
+
+  it do
+    20.times do
+      MedicalBill.create(
+        day: '2020-01-01',
+        classification: '治療費',
+        cost: 100,
+        user: user,
+        family_member: family_member,
+        payee: payee
+      )
+    end
+
+    ClassificationMigrator.execute
+
+    expect(ClassificationMigrator.classification_id_nil_count).to eq 0
+  end
 end
