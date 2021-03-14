@@ -5,7 +5,7 @@ class MedicalBillsController < ApplicationController
     respond_to do |format|
       format.html do
         @medical_bills = current_user.medical_bills
-          .preload(:family_member, :payee)
+          .preload(:family_member, :payee, :_classification)
           .order(day: :desc, created_at: :desc)
           .page(params[:page])
         render :index
@@ -36,7 +36,7 @@ class MedicalBillsController < ApplicationController
 
   def update
     if @medical_bill.update(medical_bill_params)
-      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を更新しました"
+      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill._classification.name}を更新しました"
     else
       render :edit
     end
@@ -44,14 +44,14 @@ class MedicalBillsController < ApplicationController
 
   def destroy
     @medical_bill.destroy
-    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を削除しました"
+    redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill._classification.name}を削除しました"
   end
 
   def create
     @medical_bill = current_user.medical_bills.new(medical_bill_params)
     
     if @medical_bill.save
-      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill.classification}を登録しました"
+      redirect_to medical_bills_path, notice: "#{@medical_bill.day} #{@medical_bill.family_member.name}の#{@medical_bill._classification.name}を登録しました"
     else
       render :new
     end
@@ -60,7 +60,7 @@ class MedicalBillsController < ApplicationController
   private
 
   def medical_bill_params
-    params.require(:medical_bill).permit(:day, :family_member_id, :payee_id, :classification, :cost)
+    params.require(:medical_bill).permit(:day, :family_member_id, :payee_id, :classification_id, :cost)
   end
 
   def set_medical_bill
