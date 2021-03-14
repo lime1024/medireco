@@ -49,7 +49,7 @@ RSpec.describe MedicalBill, type: :model do
 
   describe '#can_not_set_future_date' do
     it '未来日なら登録できないこと' do
-      medical_bill = described_class.new(day: Date.tomorrow, classification: "治療費", cost: 100)
+      medical_bill = described_class.new(day: Date.tomorrow, cost: 100)
       expect(medical_bill).to_not be_valid
     end
   end
