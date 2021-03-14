@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_150929) do
+ActiveRecord::Schema.define(version: 2021_03_14_083207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,14 +29,13 @@ ActiveRecord::Schema.define(version: 2021_03_07_150929) do
 
   create_table "medical_bills", force: :cascade do |t|
     t.date "day", null: false
-    t.string "classification"
     t.integer "cost", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "family_member_id", null: false
     t.bigint "payee_id", null: false
-    t.bigint "classification_id"
+    t.bigint "classification_id", null: false
     t.index ["classification_id"], name: "index_medical_bills_on_classification_id"
     t.index ["family_member_id"], name: "index_medical_bills_on_family_member_id"
     t.index ["payee_id"], name: "index_medical_bills_on_payee_id"
