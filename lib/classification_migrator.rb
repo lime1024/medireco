@@ -24,4 +24,8 @@ class ClassificationMigrator
       end
     end
   end
+
+  def self.classification_id_nil_count
+    MedicalBill.where(classification_id: nil).count
+  end
 end
