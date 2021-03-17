@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_142347) do
+ActiveRecord::Schema.define(version: 2021_03_16_145456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 2021_03_16_142347) do
     t.index ["user_id"], name: "index_payees_on_user_id"
   end
 
+  create_table "template_records", force: :cascade do |t|
+    t.integer "cost"
+    t.bigint "classification_id", null: false
+    t.bigint "family_member_id", null: false
+    t.bigint "payee_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "template_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "templates", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -66,4 +77,9 @@ ActiveRecord::Schema.define(version: 2021_03_16_142347) do
   end
 
   add_foreign_key "medical_bills", "classifications"
+  add_foreign_key "template_records", "classifications"
+  add_foreign_key "template_records", "family_members"
+  add_foreign_key "template_records", "payees"
+  add_foreign_key "template_records", "templates"
+  add_foreign_key "template_records", "users"
 end
