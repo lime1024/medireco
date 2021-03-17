@@ -15,7 +15,7 @@
         = link_to '＋', new_user_family_member_path(user_id: current_user.id, from: 'medical_bill'), class: "medical_bills-container_add-family_member"
       li
         .medical_bills-container_new-classification
-          = form.select :classification, [["治療費", "治療費"], ["医薬品費", "医薬品費"], ["交通費", "交通費"]], prompt: "支払区分を選択"
+          = form.collection_select :classification_id, Classification.all, :id, :name, prompt: "支払区分を選択"
       li
         .medical_bills-container_new-payee
           = form.collection_select :payee_id, current_user.payees, :id, :name, prompt: "支払先を選択"

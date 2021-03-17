@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Classification.find_or_create_by!(name: '治療費')
+Classification.find_or_create_by!(name: '医薬品費')
+Classification.find_or_create_by!(name: '交通費')
