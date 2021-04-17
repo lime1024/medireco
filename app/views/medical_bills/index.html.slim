@@ -26,7 +26,7 @@
           td= medical_bill.day
           td= medical_bill.family_member.name
           td= medical_bill.payee.name
-          td= medical_bill.classification
+          td= medical_bill._classification.name
           td= medical_bill.cost
           td= link_to '編集', edit_medical_bill_path(medical_bill), class: "medical_bills-container_edit"
           td= link_to '削除', medical_bill, method: :delete, class: "medical_bills-container_delete", date: { confirm: "#{medical_bill.day} #{medical_bill.family_member.name}の#{medical_bill.classification}を削除します。よろしいですか？" }

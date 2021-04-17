@@ -2,9 +2,9 @@ class MedicalBill < ApplicationRecord
   belongs_to :user
   belongs_to :family_member
   belongs_to :payee
+  belongs_to :_classification, class_name: 'Classification', foreign_key: 'classification_id', optional: true
 
   validates :day, presence: true
-  validates :classification, presence: true
   validates :cost, presence: true, numericality: { greater_than: 0 }
   validate :can_not_set_future_date
 
@@ -20,7 +20,7 @@ class MedicalBill < ApplicationRecord
     end
 
     def summarized_output
-      joins(:family_member, :payee).group("family_members.name", "payees.name", :classification).sum(:cost)
+      joins(:family_member, :payee, :_classification).group("family_members.name", "payees.name", "classifications.name").sum(:cost)
     end
 
     def this_year_total_cost
