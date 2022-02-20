@@ -280,7 +280,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 2.6.9p207
+   ruby 2.7.5p203
 
 BUNDLED WITH
-   2.0.1
+   2.1.4
