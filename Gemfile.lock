@@ -169,6 +169,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.0.3)
+    rexml (3.2.5)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -265,6 +266,7 @@ DEPENDENCIES
   pg
   puma
   rails (= 6.0.4.6)
+  rexml
   rspec-rails
   rubyXL
   sass-rails
