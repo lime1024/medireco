@@ -1,8 +1,10 @@
 version: 2.1
+orbs: 
+  browser-tools: circleci/browser-tools@1.2
 jobs:
   test:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: cimg/ruby:3.0-node
         environment:
           BUNDLER_VERSION: 2.2
           PGHOST: 127.0.0.1
@@ -26,10 +28,11 @@ jobs:
             - ./vendor/bundle
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: bundle exec rails db:create db:schema:load
+      - browser-tools/install-chrome
       - run: bundle exec rspec
   deploy-to-production:
     docker:
-      - image: circleci/ruby:2.6.6
+      - image: cimg/ruby:3.0
     steps:
       - checkout
       - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
