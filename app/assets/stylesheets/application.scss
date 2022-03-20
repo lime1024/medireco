@@ -106,6 +106,8 @@ html {
       flex: 1;
       display: flex;
       flex-direction: row;
+      max-width: 980px;
+      margin: 0 auto;
       .container-sessions {
         flex-basis: 40%;
         text-align: center;
@@ -179,30 +181,28 @@ html {
       background-color: #5B5B5B;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      .footer {
-        h2 {
-          font-size: 1.2rem;
+      h2 {
+        font-size: 1.2rem;
+        color: white;
+      }
+      h3 {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+        color: white;
+        a {
           color: white;
         }
-        h3 {
-          font-size: 1.2rem;
-          margin-top: 0.5rem;
-          color: white;
-          a {
-            color: white;
-          }
-          .policy {
-            margin-right: 0.5rem;
-          }
-          .policy:hover {
-            text-decoration: underline;
-          }
-          .disclaimer {
-            margin-left: 0.5rem;
-          }
-          .disclaimer:hover {
-            text-decoration: underline;
-          }
+        .policy {
+          margin-right: 0.5rem;
+        }
+        .policy:hover {
+          text-decoration: underline;
+        }
+        .disclaimer {
+          margin-left: 0.5rem;
+        }
+        .disclaimer:hover {
+          text-decoration: underline;
         }
       }
     }
