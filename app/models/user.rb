@@ -5,5 +5,7 @@ class User < ApplicationRecord
   has_many :payees, dependent: :destroy
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: {
+    with: /[\w\-._]+@[\w\-._]+\.[A-Za-z]/
+  }
 end
