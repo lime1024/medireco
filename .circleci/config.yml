@@ -30,20 +30,8 @@ jobs:
       - run: bundle exec rails db:create db:schema:load
       - browser-tools/install-chrome
       - run: bundle exec rspec
-  deploy-to-production:
-    docker:
-      - image: cimg/ruby:3.0
-    steps:
-      - checkout
-      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
-  test-and-deploy:
-    jobs:
+  test:
+    jobs: 
       - test
-      - deploy-to-production:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
