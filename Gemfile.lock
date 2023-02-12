@@ -82,6 +82,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
+    date (3.3.3)
     diff-lcs (1.4.4)
     erubi (1.10.0)
     execjs (2.7.0)
@@ -127,6 +128,9 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.4.5)
+    net-imap (0.3.4)
+      date
+      net-protocol
     net-pop (0.1.2)
       net-protocol
     net-protocol (0.2.1)
@@ -273,6 +277,7 @@ DEPENDENCIES
   kaminari
   listen
   matrix
+  net-imap
   net-pop
   net-smtp
   pg
