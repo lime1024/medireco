@@ -127,6 +127,8 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.4.5)
+    net-pop (0.1.2)
+      net-protocol
     net-protocol (0.2.1)
       timeout
     net-smtp (0.3.3)
@@ -271,6 +273,7 @@ DEPENDENCIES
   kaminari
   listen
   matrix
+  net-pop
   net-smtp
   pg
   psych (~> 3)
